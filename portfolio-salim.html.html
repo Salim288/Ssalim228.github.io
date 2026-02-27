@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio - Salim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    /* Reset & tokens */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #2a2540;
+      --surface: #322d4e;
+      --border:  rgba(255,255,255,0.1);
+      --text:    #f0eeff;
+      --muted:   #b0aac8;
+      --accent:  #e8e0ff;
+      --accent2: #c8bfef;
+      --blue:    #d4ceff;
+      --sans:    'Raleway', sans-serif;
+
+      /* Hauteur de la barre (desktop) */
+      --header-h: 64px;
+      --header-h-mobile: 72px; /* marge de sécu quand le burger s’ouvre */
+    }
+
+    html {
+      scroll-behavior: smooth;
+      /* Empêche que les titres passent sous la barre lors d’un scroll vers une ancre */
+      scroll-padding-top: var(--header-h);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ══════════════════════════
+       CANVAS PARTICULES
+    ══════════════════════════ */
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ══════════════════════════
+       PAGES
+    ══════════════════════════ */
+    .page {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+      position: relative;
+      z-index: 1;
+      /* Décale tout le contenu sous une barre FIXE */
+      padding-top: var(--header-h);
+    }
+    .page.active { display: flex; }
+    .page.entering .animate { animation-play-state: running; }
+
+    /* ══════════════════════════
+       ANIMATIONS
+    ══════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideRight {
+      from { opacity: 0; transform: translateX(-30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .animate {
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+      animation-play-state: paused;
+    }
+    .animate.d1 { animation-delay: 0.05s; }
+    .animate.d2 { animation-delay: 0.15s; }
+    .animate.d3 { animation-delay: 0.25s; }
+    .animate.d4 { animation-delay: 0.35s; }
+    .animate.d5 { animation-delay: 0.45s; }
+    .animate.d6 { animation-delay: 0.55s; }
+    .animate.slide { animation-name: slideRight; }
+
+    /* ══════════════════════════
+       NAV (FIXE + hauteur stable)
+    ══════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);           /* Hauteur explicite (desktop) */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 3rem;                   /* pas de padding vertical pour stabilité */
+      background: rgba(15,14,23,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      flex-shrink: 0;
+    }
+
+    .nav-logo {
+      font-size: .88rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      color: var(--accent);
+    }
+
+    .nav-links { display: flex; gap: 0; white-space: nowrap; }
+
+    .nav-btn {
+      background: none; border: none; cursor: pointer;
+      font-family: var(--sans); font-size: .88rem;
+      color: var(--muted); padding: .6rem 1.3rem;
+      border-radius: 6px; transition: color .2s, background .2s;
+      position: relative; letter-spacing: .01em;
+    }
+    .nav-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 6px; left: 50%; right: 50%;
+      height: 2px;
+      background: rgba(255,255,255,0.6);
+      transition: left .25s, right .25s;
+      border-radius: 2px;
+    }
+    .nav-btn:hover { color: var(--text); }
+    .nav-btn:hover::after, .nav-btn.active::after { left: 16%; right: 16%; }
+    .nav-btn.active { color: var(--text); font-weight: 600; }
+
+    /* Burger */
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: .3rem; background: none; border: none; }
+    .burger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all .25s; }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ══════════════════════════
+       CONTENT
+    ══════════════════════════ */
+    .content {
+      flex: 1;
+      padding: 4rem 5rem;
+      max-width: 100%;
+      margin: 0;
+      width: 100%;
+    }
+
+    /* ══════════════════════════
+       ACCUEIL
+    ══════════════════════════ */
+    .hero-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px; height: 1px;
+      background: var(--accent2);
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -.03em;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+    .hero-title .line2 { color: var(--accent); -webkit-text-fill-color: var(--accent); }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 300;
+      letter-spacing: .04em;
+      margin-bottom: 3rem;
+    }
+
+    /* Info cards */
+    .hero-info {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 3rem;
+      width: 100%;
+    }
+    .info-cell {
+      background: var(--surface);
+      padding: 1.5rem 1.8rem;
+      transition: background .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .info-cell::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 40%; height: 200%;
+      background: rgba(255,255,255,.03);
+      transform: skewX(-20deg);
+      transition: left .5s;
+    }
+    .info-cell:hover { background: rgba(108,99,255,0.08); }
+    .info-cell:hover::before { left: 150%; }
+    .info-label { font-size: .6rem; text-transform: uppercase; letter-spacing: .15em; color: var(--muted); margin-bottom: .5rem; }
+    .info-val { font-size: .92rem; font-weight: 700; }
+
+    /* Skills */
+    .skills-wrap { margin-top: 3rem; }
+    .skills-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .18em; color: var(--muted); margin-bottom: 1.2rem; }
+    .skills-chips { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .chip {
+      font-size: .78rem;
+      padding: .45rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.1);
+      color: var(--muted);
+      background: rgba(255,255,255,.03);
+      cursor: default;
+      transition: all .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .chip::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
+      transform: translateX(-100%);
+      transition: transform .4s;
+    }
+    .chip:hover::after { transform: translateX(100%); }
+    .chip:hover { border-color: var(--blue); color: var(--text); transform: translateY(-2px); }
+    .chip.main { border-color: rgba(108,99,255,.5); color: #c4bfff; background: rgba(108,99,255,.12); }
+    .chip.main:hover { border-color: var(--blue); background: rgba(108,99,255,.25); }
+
+    /* ══════════════════════════
+       PAGE HEADER
+    ══════════════════════════ */
+    .page-header { margin-bottom: 3rem; }
+    .page-header h1 {
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -.02em;
+      margin-bottom: .5rem;
+      line-height: 1.05;
+    }
+    .page-header h1 span { color: var(--accent); }
+    .page-header p { color: var(--muted); font-size: .92rem; font-weight: 300; }
+
+    /* ══════════════════════════
+       RÉALISATIONS
+    ══════════════════════════ */
+    .real-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; width: 100%; }
+    .real-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+      cursor: default;
+    }
+    .real-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: rgba(255,255,255,0.7);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s;
+    }
+    .real-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,.2); box-shadow: 0 20px 40px rgba(0,0,0,.4), 0 0 30px rgba(255,255,255,.05); }
+    .real-card:hover::before { transform: scaleX(1); }
+    .real-num { font-size: .6rem; letter-spacing: .2em; color: var(--accent2); text-transform: uppercase; margin-bottom: 1.2rem; }
+    .real-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .6rem; }
+    .real-card p { font-size: .87rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.2rem; }
+    .real-techs { display: flex; gap: .4rem; flex-wrap: wrap; }
+    .stage-link, .real-tech {
+      font-size: .72rem;
+      padding: .35rem .9rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      text-decoration: none;
+      background: rgba(255,255,255,.03);
+      transition: all .2s;
+      font-family: var(--sans);
+      cursor: pointer;
+      display: inline-block;
+    }
+    .stage-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ══════════════════════════
+       VEILLE
+    ══════════════════════════ */
+    .veille-list { display: flex; flex-direction: column; gap: 1.2rem; }
+    .veille-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 2rem;
+      align-items: start;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .veille-item::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: rgba(255,255,255,0.5);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform .3s;
+    }
+    .veille-item:hover { border-color: rgba(255,255,255,.2); transform: translateX(4px); box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+    .veille-item:hover::after { transform: scaleY(1); }
+    .veille-date { font-size: .65rem; text-transform: uppercase; letter-spacing: .1em; color: var(--accent2); line-height: 1.6; font-weight: 600; }
+    .veille-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; }
+    .veille-item p { font-size: .87rem; color: var(--muted); line-height: 1.7; }
+    .veille-tag { display: inline-block; margin-top: .75rem; font-size: .65rem; padding: .25rem .65rem; border-radius: 4px; background: rgba(255,255,255,.08); color: var(--accent); border: 1px solid rgba(255,255,255,.15); text-decoration: none; }
+
+    /* ══════════════════════════
+       SYNTHÈSE
+    ══════════════════════════ */
+    .synth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .synth-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .synth-block:hover { border-color: rgba(255,255,255,.2); box-shadow: 0 8px 25px rgba(0,0,0,.3); }
+    .synth-block.full { grid-column: 1 / -1; }
+    .synth-block h3 { font-size: .65rem; text-transform: uppercase; letter-spacing: .18em; color: var(--accent2); margin-bottom: 1.2rem; }
+    .synth-block > p { font-size: .9rem; color: var(--muted); line-height: 1.8; }
+    .timeline { display: flex; flex-direction: column; }
+    .tl-item { display: grid; grid-template-columns: 90px 1fr; gap: 1.2rem; padding: .9rem 0; border-bottom: 1px solid var(--border); transition: background .2s; border-radius: 4px; }
+    .tl-item:last-child { border-bottom: none; }
+    .tl-date { font-size: .7rem; color: var(--accent2); font-weight: 600; padding-top: .1rem; }
+    .tl-content h4 { font-size: .9rem; font-weight: 600; margin-bottom: .2rem; }
+    .tl-content p { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+
+    /* ══════════════════════════
+       STAGES
+    ══════════════════════════ */
+    .stages-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .stage-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 2rem;
+      align-items: start;
+      transition: border-color .25s, transform .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .stage-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 3px;
+      background: rgba(255,255,255,0.4);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform .3s;
+    }
+    .stage-card:hover { border-color: rgba(255,255,255,.2); transform: translateX(4px); }
+    .stage-card:hover::before { transform: scaleY(1); }
+    .stage-date { font-size: .7rem; color: var(--accent2); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; line-height: 1.6; }
+    .stage-entreprise { font-size: 1.1rem; font-weight: 700; margin-bottom: .4rem; }
+    .stage-poste { font-size: .8rem; color: var(--accent2); margin-bottom: .75rem; letter-spacing: .05em; }
+    .stage-desc { font-size: .87rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+    .stage-links { display: flex; gap: .75rem; flex-wrap: wrap; }
+
+    /* ══════════════════════════
+       FOOTER
+    ══════════════════════════ */
+    .page-footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.15);
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ══════════════════════════
+       RESPONSIVE
+    ══════════════════════════ */
+    @media (max-width: 900px) {
+      .hero-info { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .content { padding: 3rem 2rem; }
+      .real-grid { grid-template-columns: 1fr 1fr; }
+      .synth-grid { grid-template-columns: 1fr; }
+      .synth-block.full { grid-column: 1; }
+      .pres-grid { grid-template-columns: 1fr; }
+      .stage-card { grid-template-columns: 1fr; gap: 1rem; }
+    }
+    @media (max-width: 480px) {
+      /* La barre peut grandir en mobile (burger) */
+      html { scroll-padding-top: var(--header-h-mobile); }
+
+      nav {
+        padding: 0 1.2rem;
+        height: auto;
+        min-height: 56px;
+        flex-wrap: wrap;
+        gap: .5rem;
+      }
+      .nav-links {
+        display: none; flex-direction: column; width: 100%;
+        background: rgba(15,14,23,.98); border-top: 1px solid var(--border);
+        padding: .5rem 0; white-space: normal;
+      }
+      .nav-links.open { display: flex; }
+      .burger { display: flex; }
+      .nav-btn { width: 100%; text-align: left; border-radius: 0; padding: .85rem 1.2rem; border-bottom: 1px solid var(--border); }
+      .nav-btn:last-child { border-bottom: none; }
+      .nav-btn::after { display: none; }
+
+      .page { padding-top: var(--header-h-mobile); }
+      .content { padding: 2.5rem 1.2rem; }
+      .hero-info { grid-template-columns: 1fr 1fr; }
+      .real-grid { grid-template-columns: 1fr; }
+      .veille-item { grid-template-columns: 1fr; gap: .5rem; }
+      .tl-item { grid-template-columns: 70px 1fr; }
+    }
+    @media (max-width: 360px) {
+      .hero-info { grid-template-columns: 1fr; }
+      .content { padding: 2rem 1rem; }
+    }
+
+    /* Présentation */
+    .pres-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: start; }
+    .pres-avatar { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem 2rem; text-align: center; }
+    .avatar-circle { width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,.08); border: 2px solid var(--border); margin: 0 auto 1.2rem; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
+    .pres-avatar h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: .3rem; }
+    .pres-avatar p { font-size: .8rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .cv-btn { display: inline-block; padding: .7rem 1.5rem; border: 1px solid var(--border); border-radius: 8px; font-size: .8rem; color: var(--accent); text-decoration: none; background: rgba(255,255,255,.04); transition: background .2s, border-color .2s; cursor: pointer; font-family: var(--sans); }
+    .cv-btn:hover { background: rgba(255,255,255,.08); border-color: var(--accent); }
+    .pres-content { display: flex; flex-direction: column; gap: 1.5rem; }
+    .pres-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: border-color .25s; }
+    .pres-block:hover { border-color: rgba(255,255,255,.2); }
+    .pres-block h3 { font-size: .65rem; text-transform: uppercase; letter-spacing: .18em; color: var(--accent2); margin-bottom: 1rem; }
+    .pres-block p { font-size: .9rem; color: var(--muted); line-height: 1.8; }
+    .pres-block ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .pres-block ul li { font-size: .9rem; color: var(--muted); padding-left: 1.2rem; position: relative; }
+    .pres-block ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent2); font-size: .75rem; }
+  </style>
+</head>
+<body>
+
+<!-- Particules canvas -->
+<canvas id="particles"></canvas>
+
+<!-- ══════════════════════════════
+     PAGE 1 — ACCUEIL
+══════════════════════════════ -->
+<div class="page active" id="page-accueil">
+  <nav>
+    <span class="nav-logo">portfolio-salim</span>
+    <button class="burger" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <button class="nav-btn active" onclick="goTo('accueil')">Accueil</button>
+      <button class="nav-btn" onclick="goTo('presentation')">Présentation</button>
+      <button class="nav-btn" onclick="goTo('stages')">Stages</button>
+      <button class="nav-btn" onclick="goTo('realisations')">Réalisations professionnelles</button>
+      <button class="nav-btn" onclick="goTo('veille')">Veille</button>
+      <button class="nav-btn" onclick="goTo('synthese')">Synthèse</button>
+    </div>
+  </nav>
+
+  <div class="content">
+    <div class="hero-eyebrow animate d1">BTS SIO · Bordeaux</div>
+    <div class="hero-title animate d2">
+      Portfolio —<br/><span class="line2">Salim</span>
+    </div>
+    <div class="hero-sub animate d3">Lycée Gustave Eiffel · 2ème année · 2024 - 2026</div>
+
+    <div class="hero-info animate d4">
+      <div class="info-cell"><div class="info-label">Formation</div><div class="info-val">BTS SIO</div></div>
+      <div class="info-cell"><div class="info-label">Établissement</div><div class="info-val">Gustave Eiffel</div></div>
+      <div class="info-cell"><div class="info-label">Ville</div><div class="info-val">Bordeaux</div></div>
+      <div class="info-cell"><div class="info-label">Année</div><div class="info-val">2024 — 2026</div></div>
+    </div>
+
+    <div class="skills-wrap animate d5">
+      <div class="skills-label">Compétences</div>
+      <div class="skills-chips">
+        <span class="chip">Linux / Debian</span>
+        <span class="chip">Python</span>
+        <span class="chip">Administration système</span>
+        <span class="chip">Terminal / Bash</span>
+        <span class="chip">Réseau</span>
+        <span class="chip">Virtualisation</span>
+        <span class="chip">Open Source</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">Salim Salim · Portfolio BTS · 2025</div>
+</div>
+
+<!-- ══════════════════════════════
+     PAGE 2 — RÉALISATIONS
+══════════════════════════════ -->
+<div class="page" id="page-realisations">
+  <nav>
+    <span class="nav-logo">portfolio-salim</span>
+    <button class="burger" onclick="toggleMenu(this)">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <button class="nav-btn" onclick="goTo('accueil')">Accueil</button>
+      <button class="nav-btn" onclick="goTo('presentation')">Présentation</button>
+      <button class="nav-btn" onclick="goTo('stages')">Stages</button>
+      <button class="nav-btn active" onclick="goTo('realisations')">Réalisations professionnelles</button>
+      <button class="nav-btn" onclick="goTo('veille')">Veille</button>
+      <button class="nav-btn" onclick="goTo('synthese')">Synthèse</button>
+    </div>
+  </nav>
+
+  <div class="content">
+    <div class="page-header animate d1">
+      <h1>Réalisations<br><span>professionnelles</span></h1>
+      <p>Projets réalisés en cours, en stage ou en autonomie.</p>
+    </div>
+
+    <div class="real-grid">
+      <div class="real-card animate d2">
+        <div class="real-num">AP 2.1</div>
+        <h3>AP 2.1</h3>
+        <p>Fiche de réalisation professionnelle AP 2.1.</p>
+        <div class="real-techs">
+          <a href="fiche-rp/ap2.1.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
+        </div>
+      </div>
+
+      <div class="real-card animate d3">
+        <div class="real-num">AP 2.3</div>
+        <h3>AP 2.3</h3>
+        <p>Fiche de réalisation professionnelle AP 2.3.</p>
+        <div class="real-techs">
+          <a href="fiche-rp/ap2.3.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
+        </div>
+      </div>
+
+      <div class="real-card animate d4">
+        <div class="real-num">AP 2.2</div>
+        <h3>AP 2.2</h3>
+        <p>Fiche de réalisation professionnelle AP 2.2.</p>
+        <div class="real-techs">
+          <a href="fiche-rp/ap2.2.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
+        </div>
+      </div>
+
+      <div class="real-card animate d5">
+        <div class="real-num">AP 2.4</div>
+        <h3>AP 2.4</h3>
+        <p>Fiche de réalisation professionnelle AP 2.4.</p>
+        <div class="real-techs">
+          <a href="fiche-rp/ap2.4.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
+        </div>
+      </div>
+
+      <div class="real-card animate d4">
+        <div class="real-num">AP 3.1</div>
+        <h3>AP 3.1</h3>
+        <p>Fiche de réalisation professionnelle AP 3.1.</p>
+        <div class="real-techs">
+          <a href="fiche-rp/ap3.1.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
+        </div>
+      </div>
+
+      <div class="real-card animate d4">
+        <div class="real-num">AP 3.2</div>
+        <h3>AP 3.2</h3>
+        <p>Fiche de réalisation professionnelle AP 3.2.</p>
+        <div class="real-techs">
+          <a href="fiche-rp/ap3.2.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
+        </div>
+      </div>
+
+      <!-- (Optionnel) Carte Table de Synthèse si tu veux aussi l’avoir ici -->
+      <div class="real-card animate d5">
+        <div class="real-num">TS</div>
+        <h3>Table de Synthèse</h3>
+        <p>Table de Synthèse SISR.</p>
+        <div class="real-techs">
+          <a href="fiche-rp/TS-sisr.pdf" target="_blank" class="stage-link">Voir la table de synthèse</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">Salim · Portfolio BTS SIO · 2025</div>
+</div>
+
+<!-- ══════════════════════════════
+     PAGE 3 — VEILLE
+══════════════════════════════ -->
+<div class="page" id="page-veille">
+  <nav>
+    <span class="nav-logo">portfolio-salim</span>
+    <button class="burger" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <button class="nav-btn" onclick="goTo('accueil')">Accueil</button>
+      <button class="nav-btn" onclick="goTo('presentation')">Présentation</button>
+      <button class="nav-btn" onclick="goTo('stages')">Stages</button>
+      <button class="nav-btn" onclick="goTo('realisations')">Réalisations professionnelles</button>
+      <button class="nav-btn active" onclick="goTo('veille')">Veille</button>
+      <button class="nav-btn" onclick="goTo('synthese')">Synthèse</button>
+    </div>
+  </nav>
+
+  <div class="content">
+    <div class="page-header animate d1">
+      <h1>Veille<br/><span>technologique</span></h1>
+      <p>Suivi des actualités et évolutions du secteur informatique.</p>
+    </div>
+    <div class="veille-list">
+      <div class="veille-item animate d2">
+        <div class="veille-date">Fév<br/>2026</div>
+        <div>
+          <h3>L'IA et la cybersécurité : entre menace et protection</h3>
+          <p>L'intelligence artificielle transforme profondément la cybersécurité. Elle permet de détecter automatiquement les menaces en temps réel, d'analyser des volumes massifs de logs et d'anticiper les attaques. Mais elle est aussi utilisée par les hackers pour automatiser leurs attaques. En tant que futur technicien SISR, comprendre ces enjeux est essentiel.</p>
+          <a href="https://cyber.gouv.fr/enjeux-technologiques/intelligence-artificielle/" target="_blank" class="veille-tag">🔗 Source : ANSSI</a>
+        </div>
+      </div>
+      <div class="veille-item animate d3">
+        <div class="veille-date">Jan<br/>2026</div>
+        <div>
+          <h3>Les grands modèles d'IA en 2025-2026</h3>
+          <p>Le marché de l'IA générative évolue très rapidement. Plusieurs modèles majeurs se succèdent et accélèrent l'innovation, rendant ces outils de plus en plus utiles dans les métiers IT au quotidien.</p>
+          <a href="https://www.jedha.co/formation-ia/gemini-vs-chatgpt-quelle-est-la-meilleure-ia-en-2025" target="_blank" class="veille-tag">🔗 Source : Jedha</a>
+        </div>
+      </div>
+      <div class="veille-item animate d4">
+        <div class="veille-date">Août<br/>2025</div>
+        <div>
+          <h3>Impact sur les métiers IT (SISR)</h3>
+          <p>L'IA automatise des tâches répétitives (gestion de tickets, analyse de logs, configuration) sans remplacer l'expertise humaine, agissant comme un copilote.</p>
+          <a href="https://www.formip.com/pages/blog/ia-pour-it-admin-reseau-support" target="_blank" class="veille-tag">🔗 Source : Formip</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">Salim Salim · Portfolio BTS · 2025</div>
+</div>
+
+<!-- ══════════════════════════════
+     PAGE 4 — SYNTHÈSE
+══════════════════════════════ -->
+<div class="page" id="page-synthese">
+  <nav>
+    <span class="nav-logo">portfolio-salim</span>
+    <button class="burger" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <button class="nav-btn" onclick="goTo('accueil')">Accueil</button>
+      <button class="nav-btn" onclick="goTo('presentation')">Présentation</button>
+      <button class="nav-btn" onclick="goTo('stages')">Stages</button>
+      <button class="nav-btn" onclick="goTo('realisations')">Réalisations professionnelles</button>
+      <button class="nav-btn" onclick="goTo('veille')">Veille</button>
+      <button class="nav-btn active" onclick="goTo('synthese')">Synthèse</button>
+    </div>
+  </nav>
+
+  <div class="content">
+    <div class="page-header animate d1">
+      <h1><span>Synthèse</span></h1>
+      <p>Bilan de ma formation et de mon parcours en BTS.</p>
+    </div>
+    <div class="synth-grid">
+      <div class="synth-block full animate d2">
+        <h3>Table de Synthèse</h3>
+        <div class="real-techs">
+          <a href="fiche-rp/TS-sisr.pdf" target="_blank" class="stage-link">Voir la table de synthèse</a>
+        </div>
+      </div>
+      <div class="synth-block animate d3">
+        <h3>Compétences acquises</h3>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-date">Compétence</div>
+            <div class="tl-content"><h4>Linux / Debian</h4><p>Administration, configuration, gestion des services.</p></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">Compétence</div>
+            <div class="tl-content"><h4>Python</h4><p>Scripting, automatisation, logique de programmation.</p></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">Compétence</div>
+            <div class="tl-content"><h4>À compléter</h4><p>Décris une autre compétence clé.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="synth-block animate d4">
+        <h3>Parcours</h3>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-date">Septembre 2024</div>
+            <div class="tl-content"><h4>Entrée en BTS</h4><p>Lycée Gustave Eiffel, Bordeaux.</p></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2025 - 2026</div>
+            <div class="tl-content"><h4>Stage / projet</h4><p>À compléter avec ton expérience.</p></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">Septembre 2024 - 2025</div>
+            <div class="tl-content"><h4>1er année</h4><p>Découverte des spécialités SLAM/SISR. Choix SISR.</p></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">Septembre 2025 - 2026</div>
+            <div class="tl-content"><h4>2ème année</h4><p>Approfondissement réseau et système, montée en autonomie.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">Salim Salim · Portfolio BTS · 2025</div>
+</div>
+
+<!-- ══════════════════════════════
+     PAGE 5 — PRÉSENTATION
+══════════════════════════════ -->
+<div class="page" id="page-presentation">
+  <nav>
+    <span class="nav-logo">portfolio-salim</span>
+    <button class="burger" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <button class="nav-btn" onclick="goTo('accueil')">Accueil</button>
+      <button class="nav-btn active" onclick="goTo('presentation')">Présentation</button>
+      <button class="nav-btn" onclick="goTo('stages')">Stages</button>
+      <button class="nav-btn" onclick="goTo('realisations')">Réalisations professionnelles</button>
+      <button class="nav-btn" onclick="goTo('veille')">Veille</button>
+      <button class="nav-btn" onclick="goTo('synthese')">Synthèse</button>
+    </div>
+  </nav>
+
+  <div class="content">
+    <div class="page-header animate d1">
+      <h1>Présentation<br/><span>personnelle</span></h1>
+      <p>Qui suis-je ? Mon parcours, mes compétences et mon CV.</p>
+    </div>
+    <div class="pres-grid animate d2">
+      <div class="pres-avatar">
+        <div class="avatar-circle">👤</div>
+        <h2>Salim Salim</h2>
+        <p>Étudiant BTS SIO<br/>Lycée Gustave Eiffel<br/>Bordeaux</p>
+        <a href="#" class="cv-btn">📄 Télécharger mon CV</a>
+      </div>
+      <div class="pres-content">
+        <div class="pres-block animate d3">
+          <h3>Qui suis-je ?</h3>
+          <p>Je m'appelle Salim SALIM, j'ai 19 ans et je suis étudiant en BTS SIO option SISR au Lycée Gustave Eiffel de Bordeaux. Cette formation m’a permis de découvrir en profondeur les systèmes et réseaux, et d’acquérir des compétences techniques solides.</p>
+        </div>
+        <div class="pres-block animate d4">
+          <h3>Mes points forts</h3>
+          <ul>
+            <li>Administration Linux / Debian</li>
+            <li>Bases en Python</li>
+            <li>PowerShell</li>
+            <li>Curiosité et travail en équipe</li>
+          </ul>
+        </div>
+        <div class="pres-block animate d5">
+          <h3>Formation</h3>
+          <p>BTS SIO (Services Informatiques aux Organisations) — 2ème année au Lycée Gustave Eiffel, Bordeaux. Option SISR (Solutions d'Infrastructure, Systèmes et Réseaux).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">Salim Salim · Portfolio BTS · 2025</div>
+</div>
+
+<!-- ══════════════════════════════
+     PAGE 6 — STAGES
+══════════════════════════════ -->
+<div class="page" id="page-stages">
+  <nav>
+    <span class="nav-logo">portfolio-salim</span>
+    <button class="burger" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <button class="nav-btn" onclick="goTo('accueil')">Accueil</button>
+      <button class="nav-btn" onclick="goTo('presentation')">Présentation</button>
+      <button class="nav-btn active" onclick="goTo('stages')">Stages</button>
+      <button class="nav-btn" onclick="goTo('realisations')">Réalisations professionnelles</button>
+      <button class="nav-btn" onclick="goTo('veille')">Veille</button>
+      <button class="nav-btn" onclick="goTo('synthese')">Synthèse</button>
+    </div>
+  </nav>
+
+  <div class="content">
+    <div class="page-header animate d1">
+      <h1><span>Stages</span></h1>
+      <p>Expériences professionnelles et rapports de stage.</p>
+    </div>
+    <div class="stages-list">
+      <div class="stage-card animate d2">
+        <div class="stage-date">Stage 1<br/>Mai — Juin 2025<br/>5 semaines</div>
+        <div>
+          <div class="stage-entreprise">Ynov Campus</div>
+          <div class="stage-poste">Support IT — Administration Système</div>
+          <p class="stage-desc">Stage de 5 semaines au service informatique d'Ynov Campus. Missions axées sur l'administration système : gestion du parc informatique, configuration des postes et support utilisateurs.</p>
+          <div class="stage-links">
+            <a href="fiche-rp/fiche-rp-stage1.pdf" target="_blank" class="stage-link">📄 Fiche RP - Stage 1ère année</a>
+            <a href="https://www.ynov.com" target="_blank" class="stage-link">🔗 Site Ynov Campus</a>
+          </div>
+        </div>
+      </div>
+      <div class="stage-card animate d3">
+        <div class="stage-date">Stage 2<br/>19 Jan — 13 Mars 2026<br/>8 semaines</div>
+        <div>
+          <div class="stage-entreprise">Ynov Campus</div>
+          <div class="stage-poste">Support IT — Rédaction de procédures</div>
+          <p class="stage-desc">Stage de 8 semaines chez Ynov Campus. Missions principalement orientées rédaction et formalisation de procédures techniques pour documenter les processus informatiques internes.</p>
+          <div class="stage-links">
+            <a href="fiche-rp/fiche-rp-stage2.pdf" target="_blank" class="stage-link">📄 Fiche RP - Stage 2ème année</a>
+            <a href="https://www.ynov.com" target="_blank" class="stage-link">🔗 Site Ynov Campus</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">Salim Salim · Portfolio BTS · 2025</div>
+</div>
+
+<script>
+  /* ── Navigation (pages internes) ── */
+  function goTo(page) {
+    // Switch page
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active', 'entering'));
+    document.querySelectorAll('.nav-links').forEach(n => n.classList.remove('open'));
+    document.querySelectorAll('.burger').forEach(b => b.classList.remove('open'));
+
+    const target = document.getElementById('page-' + page);
+    if (!target) return;
+
+    target.classList.add('active');
+    // Reset + replay animations
+    target.querySelectorAll('.animate').forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight; // reflow
+      el.style.animation = '';
+    });
+    setTimeout(() => target.classList.add('entering'), 10);
+    // Remet en haut de la page (utile en mobile)
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  function toggleMenu(btn) {
+    btn.classList.toggle('open');
+    const links = btn.closest('nav').querySelector('.nav-links');
+    if (links) links.classList.toggle('open');
+  }
+
+  // Trigger animations on load
+  document.getElementById('page-accueil').classList.add('entering');
+
+  /* ── Particles ── */
+  const canvas = document.getElementById('particles');
+  const ctx    = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function Particle() {
+    this.x   = Math.random() * W;
+    this.y   = Math.random() * H;
+    this.r   = Math.random() * 1.5 + 0.3;
+    this.vx  = (Math.random() - 0.5) * 0.3;
+    this.vy  = (Math.random() - 0.5) * 0.3;
+    this.a   = Math.random() * 0.5 + 0.1;
+    const hues = [270, 280, 260, 250];
+    this.hue = hues[Math.floor(Math.random() * hues.length)];
+  }
+  Particle.prototype.update = function() {
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.x < 0) this.x = W;
+    if (this.x > W) this.x = 0;
+    if (this.y < 0) this.y = H;
+    if (this.y > H) this.y = 0;
+  };
+  Particle.prototype.draw = function() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = `hsla(${this.hue}, 30%, 90%, ${this.a})`;
+    ctx.fill();
+  };
+
+  // Create particles
+  for (let i = 0; i < 90; i++) particles.push(new Particle());
+
+  function drawLines() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 100) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(220,215,255,${0.07 * (1 - dist/100)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    drawLines();
+    requestAnimationFrame(loop);
+  }
+  loop();
+</script>
+</body>
+</html>
