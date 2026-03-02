@@ -540,7 +540,7 @@
   <div class="content">
     <div class="page-header animate d1">
       <h1>Réalisations<br><span>professionnelles</span></h1>
-      <p>Projets réalisés en cours.</p>
+      <p>Projets réalisés en cours, en stage ou en autonomie.</p>
     </div>
 
     <!-- ✅ 1ère année : titre + espacement + grand rectangle -->
@@ -606,7 +606,19 @@
         </div>
       </div>
     </div>
-    
+
+    <!-- ✅ Table de synthèse — pleine largeur, séparée -->
+    <div class="real-section-wrapper animate d6" style="margin-top: 1.5rem;">
+      <div class="real-card" style="grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;">
+        <div>
+          <div class="real-num">TS</div>
+          <h3 style="font-size: 1.3rem;">Table de synthèse</h3>
+          <p style="margin-bottom: 0;">Table de Synthèse SISR.</p>
+        </div>
+        <div class="real-techs">
+          <a href="fiche-rp/TS-sisr.pdf" target="_blank" class="stage-link" style="font-size:.85rem; padding:.5rem 1.4rem;">Voir la table de synthèse</a>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -630,31 +642,67 @@
   <div class="content">
     <div class="page-header animate d1">
       <h1>Veille<br/><span>technologique</span></h1>
-      <p>Suivi des actualités et évolutions du secteur informatique.</p>
+      <p>Thème : IA &amp; Cybersécurité — Suivi des menaces et innovations défensives.</p>
     </div>
+
+    <!-- Résumé court -->
+    <div class="synth-block animate d2" style="margin-bottom: 2.5rem; border-left: 3px solid rgba(200,191,239,0.5);">
+      <h3>Résumé</h3>
+      <p>L'IA amplifie les cyberattaques (phishing ciblé, malwares adaptatifs, exploitation automatisée) tout en dopant la défense via DevSecOps, Zero Trust et détection d'anomalies. Face à des intrusions de plus en plus rapides, maîtriser ces enjeux est indispensable pour tout technicien SISR.</p>
+    </div>
+
     <div class="veille-list">
-      <div class="veille-item animate d2">
-        <div class="veille-date">Fév<br/>2026</div>
-        <div>
-          <h3>L'IA et la cybersécurité : entre menace et protection</h3>
-          <p>L'intelligence artificielle transforme profondément la cybersécurité. Elle permet de détecter automatiquement les menaces en temps réel, d'analyser des volumes massifs de logs et d'anticiper les attaques. Mais elle est aussi utilisée par les hackers pour automatiser leurs attaques. En tant que futur technicien SISR, comprendre ces enjeux est essentiel.</p>
-          <a href="https://cyber.gouv.fr/enjeux-technologiques/intelligence-artificielle/" target="_blank" class="veille-tag">🔗 Source : ANSSI</a>
-        </div>
-      </div>
       <div class="veille-item animate d3">
-        <div class="veille-date">Jan<br/>2026</div>
+        <div class="veille-date">2026</div>
         <div>
-          <h3>Les grands modèles d'IA en 2025-2026</h3>
-          <p>Le marché de l'IA générative évolue très rapidement. Plusieurs modèles majeurs se succèdent et accélèrent l'innovation, rendant ces outils de plus en plus utiles dans les métiers IT au quotidien.</p>
-          <a href="https://www.jedha.co/formation-ia/gemini-vs-chatgpt-quelle-est-la-meilleure-ia-en-2025" target="_blank" class="veille-tag">🔗 Source : Jedha</a>
+          <h3>L'IA transforme le paysage des menaces</h3>
+          <p>73 % des entreprises subissent déjà des attaques assistées par IA : phishing hyper-personnalisé, malwares adaptatifs, chaînes d'exploitation automatisées. Pourtant, seules 37 % ont une politique de gouvernance IA, créant un risque majeur.</p>
+          <a href="https://www.kiteworks.com" target="_blank" class="veille-tag">Source : kiteworks.com</a>
         </div>
       </div>
-      <div class="veille-item animate d4">
-        <div class="veille-date">Août<br/>2025</div>
+
+      <div class="veille-item animate d3">
+        <div class="veille-date">2026</div>
         <div>
-          <h3>Impact sur les métiers IT (SISR)</h3>
-          <p>L'IA automatise des tâches répétitives (gestion de tickets, analyse de logs, configuration) sans remplacer l'expertise humaine, agissant comme un copilote.</p>
-          <a href="https://www.formip.com/pages/blog/ia-pour-it-admin-reseau-support" target="_blank" class="veille-tag">🔗 Source : Formip</a>
+          <h3>DevSecOps : la sécurité intégrée devient la norme</h3>
+          <p>La cybersécurité évolue vers le DevSecOps : des outils comme Snyk, SonarQube ou Trivy scannent automatiquement le code avant chaque déploiement. L'IA joue le rôle de "reviewer intelligent", détectant les schémas dangereux et proposant des correctifs.</p>
+          <a href="https://www.synapsys-groupe.com" target="_blank" class="veille-tag">Source : synapsys-groupe.com</a>
+        </div>
+      </div>
+
+      <div class="veille-item animate d4">
+        <div class="veille-date">2026</div>
+        <div>
+          <h3>Le temps de réaction s'effondre</h3>
+          <p>Selon l'IBM X-Force Index 2026, le temps de rupture moyen est passé de 100 à seulement 29 minutes grâce aux agents IA autonomes. La défense humaine seule devient insuffisante face à cette accélération.</p>
+          <a href="https://www.neoslab.com" target="_blank" class="veille-tag">Source : neoslab.com</a>
+        </div>
+      </div>
+
+      <div class="veille-item animate d4">
+        <div class="veille-date">2026</div>
+        <div>
+          <h3>Évolution des attaques les plus fréquentes</h3>
+          <p>Forte hausse des ransomwares multi-étapes (chiffrement + exfiltration + doxing), du spear-phishing contextuel alimenté par IA, des attaques supply chain visant les bibliothèques logicielles, et des compromissions IoT/OT dans l'industrie.</p>
+          <a href="https://www.cyberinstitut.fr" target="_blank" class="veille-tag">Source : cyberinstitut.fr</a>
+        </div>
+      </div>
+
+      <div class="veille-item animate d5">
+        <div class="veille-date">2026</div>
+        <div>
+          <h3>Innovations défensives clés</h3>
+          <p>Les entreprises adoptent le Zero Trust généralisé, l'IA défensive pour la détection d'anomalies et la segmentation automatique, l'automatisation de la réponse aux incidents, et des tests d'intrusion continus intégrés aux pipelines DevOps.</p>
+          <a href="https://www.synapsys-groupe.com" target="_blank" class="veille-tag">Source : synapsys-groupe.com</a>
+        </div>
+      </div>
+
+      <div class="veille-item animate d5">
+        <div class="veille-date">2026</div>
+        <div>
+          <h3>Souveraineté numérique &amp; réglementation</h3>
+          <p>L'IA reste un risque mal maîtrisé, ce qui pousse les entreprises à renforcer leurs politiques DORA et NIS2 en matière de résilience et de gouvernance des données. La souveraineté numérique devient un enjeu stratégique à l'échelle européenne.</p>
+          <a href="https://www.deep.eu" target="_blank" class="veille-tag">Source : deep.eu</a>
         </div>
       </div>
     </div>
@@ -755,7 +803,7 @@
         <div class="avatar-circle">👤</div>
         <h2>Salim Salim</h2>
         <p>Étudiant BTS SIO<br/>Lycée Gustave Eiffel<br/>Bordeaux</p>
-        <a href="fiche-rp/cv_salim.pdf" target="_blank" class="stage-link">📄 Consulter mon CV</a>
+        <a href="fiche-rp/cv_salim.pdf" target="_blank" class="stage-link">Consulter mon CV</a>
       </div>
       <div class="pres-content">
         <div class="pres-block animate d3">
@@ -808,7 +856,7 @@
           <div class="stage-poste">Support IT — Administration Système</div>
           <p class="stage-desc">Stage de 5 semaines au service informatique d'Ynov Campus. Missions axées sur l'administration système : gestion du parc informatique, configuration des postes et support utilisateurs.</p>
           <div class="stage-links">
-            <a href="fiche-rp/fiche-rp-stage1.pdf" target="_blank" class="stage-link">📄 Fiche RP - Stage 1ère année</a>
+            <a href="fiche-rp/fiche-rp-stage1.pdf" target="_blank" class="stage-link">Fiche RP - Stage 1ère année</a>
             <a href="https://www.ynov.com" target="_blank" class="stage-link">🔗 Site Ynov Campus</a>
           </div>
         </div>
@@ -820,7 +868,7 @@
           <div class="stage-poste">Support IT — Rédaction de procédures</div>
           <p class="stage-desc">Stage de 8 semaines chez Ynov Campus. Missions principalement orientées rédaction et formalisation de procédures techniques pour documenter les processus informatiques internes.</p>
           <div class="stage-links">
-            <a href="fiche-rp/fiche-rp-stage2.pdf" target="_blank" class="stage-link">📄 Fiche RP - Stage 2ème année</a>
+            <a href="fiche-rp/fiche-rp-stage2.pdf" target="_blank" class="stage-link">Fiche RP - Stage 2ème année</a>
             <a href="https://www.ynov.com" target="_blank" class="stage-link">🔗 Site Ynov Campus</a>
           </div>
         </div>
