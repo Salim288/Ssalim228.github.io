@@ -6,7 +6,6 @@
   <title>Portfolio - Salim</title>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
   <style>
-    /* Reset & tokens */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -19,15 +18,11 @@
       --accent2: #c8bfef;
       --blue:    #d4ceff;
       --sans:    'Raleway', sans-serif;
-
       --header-h: 64px;
       --header-h-mobile: 72px;
     }
 
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: var(--header-h);
-    }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
 
     body {
       background: var(--bg);
@@ -37,20 +32,16 @@
       overflow-x: hidden;
     }
 
-    #particles {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
+    #particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
     .page {
       display: none;
-      min-height: auto;
+      min-height: 100vh;
       flex-direction: column;
       position: relative;
       z-index: 1;
       padding-top: var(--header-h);
+      background: var(--bg);
     }
     .page.active { display: flex; }
     .page.entering .animate { animation-play-state: running; }
@@ -90,16 +81,8 @@
       z-index: 1000;
       flex-shrink: 0;
     }
-
-    .nav-logo {
-      font-size: .88rem;
-      font-weight: 700;
-      letter-spacing: .05em;
-      color: var(--accent);
-    }
-
+    .nav-logo { font-size: .88rem; font-weight: 700; letter-spacing: .05em; color: var(--accent); }
     .nav-links { display: flex; gap: 0; white-space: nowrap; }
-
     .nav-btn {
       background: none; border: none; cursor: pointer;
       font-family: var(--sans); font-size: .88rem;
@@ -126,272 +109,91 @@
     .burger.open span:nth-child(2) { opacity: 0; }
     .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    .content {
-      flex: 1;
-      padding: 4rem 5rem;
-      max-width: 100%;
-      margin: 0;
-      width: 100%;
-    }
+    .content { flex: 1; padding: 4rem 5rem; max-width: 100%; margin: 0; width: 100%; }
 
-    /* ══ ACCUEIL ══ */
+    /* ACCUEIL */
     .hero-eyebrow {
-      font-size: .72rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--accent2);
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: .75rem;
+      font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: .75rem;
     }
-    .hero-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 32px; height: 1px;
-      background: var(--accent2);
-    }
-
-    .hero-title {
-      font-size: clamp(3rem, 8vw, 6.5rem);
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -.03em;
-      margin-bottom: 1.2rem;
-      text-transform: uppercase;
-    }
+    .hero-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--accent2); }
+    .hero-title { font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 900; line-height: 1; letter-spacing: -.03em; margin-bottom: 1.2rem; text-transform: uppercase; }
     .hero-title .line2 { color: var(--accent); -webkit-text-fill-color: var(--accent); }
-
-    .hero-sub {
-      font-size: 1rem;
-      color: var(--muted);
-      font-weight: 300;
-      letter-spacing: .04em;
-      margin-bottom: 3rem;
-    }
-
-    .hero-info {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 3rem;
-      width: 100%;
-    }
-    .info-cell {
-      background: var(--surface);
-      padding: 1.5rem 1.8rem;
-      transition: background .25s;
-      position: relative;
-      overflow: hidden;
-    }
-    .info-cell::before {
-      content: '';
-      position: absolute;
-      top: -50%; left: -50%;
-      width: 40%; height: 200%;
-      background: rgba(255,255,255,.03);
-      transform: skewX(-20deg);
-      transition: left .5s;
-    }
+    .hero-sub { font-size: 1rem; color: var(--muted); font-weight: 300; letter-spacing: .04em; margin-bottom: 3rem; }
+    .hero-info { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 3rem; width: 100%; }
+    .info-cell { background: var(--surface); padding: 1.5rem 1.8rem; transition: background .25s; position: relative; overflow: hidden; }
+    .info-cell::before { content: ''; position: absolute; top: -50%; left: -50%; width: 40%; height: 200%; background: rgba(255,255,255,.03); transform: skewX(-20deg); transition: left .5s; }
     .info-cell:hover { background: rgba(108,99,255,0.08); }
     .info-cell:hover::before { left: 150%; }
     .info-label { font-size: .6rem; text-transform: uppercase; letter-spacing: .15em; color: var(--muted); margin-bottom: .5rem; }
     .info-val { font-size: .92rem; font-weight: 700; }
-
     .skills-wrap { margin-top: 3rem; }
     .skills-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .18em; color: var(--muted); margin-bottom: 1.2rem; }
     .skills-chips { display: flex; flex-wrap: wrap; gap: .6rem; }
-    .chip {
-      font-size: .78rem;
-      padding: .45rem 1.1rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.1);
-      color: var(--muted);
-      background: rgba(255,255,255,.03);
-      cursor: default;
-      transition: all .25s;
-      position: relative;
-      overflow: hidden;
-    }
-    .chip::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
-      transform: translateX(-100%);
-      transition: transform .4s;
-    }
+    .chip { font-size: .78rem; padding: .45rem 1.1rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.1); color: var(--muted); background: rgba(255,255,255,.03); cursor: default; transition: all .25s; position: relative; overflow: hidden; }
+    .chip::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent); transform: translateX(-100%); transition: transform .4s; }
     .chip:hover::after { transform: translateX(100%); }
     .chip:hover { border-color: var(--blue); color: var(--text); transform: translateY(-2px); }
-    .chip.main { border-color: rgba(108,99,255,.5); color: #c4bfff; background: rgba(108,99,255,.12); }
-    .chip.main:hover { border-color: var(--blue); background: rgba(108,99,255,.25); }
 
-    /* ══ PAGE HEADER ══ */
+    /* PAGE HEADER */
     .page-header { margin-bottom: 3rem; }
-    .page-header h1 {
-      font-size: clamp(1.8rem, 5vw, 3.2rem);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -.02em;
-      margin-bottom: .5rem;
-      line-height: 1.05;
-    }
+    .page-header h1 { font-size: clamp(1.8rem, 5vw, 3.2rem); font-weight: 900; text-transform: uppercase; letter-spacing: -.02em; margin-bottom: .5rem; line-height: 1.05; }
     .page-header h1 span { color: var(--accent); }
     .page-header p { color: var(--muted); font-size: .92rem; font-weight: 300; }
 
-    /* ══ RÉALISATIONS — section subtitle ══ */
-    .page-subtitle {
-      font-size: clamp(1rem, 2.5vw, 1.4rem);
-      font-weight: 700;
-      letter-spacing: -.01em;
-      color: var(--accent2);
-      /* ✅ Espacement ajouté entre le titre et les cartes */
-      margin-bottom: 1.8rem;
-    }
-
-    /* ✅ Grand rectangle conteneur pour chaque groupe de cartes AP */
+    /* RÉALISATIONS */
+    .page-subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); font-weight: 700; letter-spacing: -.01em; color: var(--accent2); margin-bottom: 1.8rem; }
     .real-section-wrapper {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 16px;
-      padding: 2rem 2rem;
+      padding: 2rem;
       margin-bottom: 1rem;
       box-shadow: 0 4px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.06);
       position: relative;
       overflow: hidden;
     }
-    .real-section-wrapper::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(200,191,239,0.4), transparent);
-      border-radius: 16px 16px 0 0;
-    }
-
+    .real-section-wrapper::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(200,191,239,0.4), transparent); border-radius: 16px 16px 0 0; }
     .real-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.2rem; width: 100%; }
-    .real-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
-      transition: transform .3s, border-color .3s, box-shadow .3s;
-      cursor: default;
-    }
-    .real-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: rgba(255,255,255,0.7);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform .4s;
-    }
+    .real-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; position: relative; overflow: hidden; transition: transform .3s, border-color .3s, box-shadow .3s; cursor: default; }
+    .real-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.7); transform: scaleX(0); transform-origin: left; transition: transform .4s; }
     .real-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,.2); box-shadow: 0 20px 40px rgba(0,0,0,.4), 0 0 30px rgba(255,255,255,.05); }
     .real-card:hover::before { transform: scaleX(1); }
     .real-num { font-size: .6rem; letter-spacing: .2em; color: var(--accent2); text-transform: uppercase; margin-bottom: 1.2rem; }
     .real-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .6rem; }
     .real-card p { font-size: .87rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.2rem; }
     .real-techs { display: flex; gap: .4rem; flex-wrap: wrap; }
-    .stage-link, .real-tech {
-      font-size: .72rem;
-      padding: .35rem .9rem;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      text-decoration: none;
-      background: rgba(255,255,255,.03);
-      transition: all .2s;
-      font-family: var(--sans);
-      cursor: pointer;
-      display: inline-block;
-    }
+    .stage-link, .real-tech { font-size: .72rem; padding: .35rem .9rem; border-radius: 6px; border: 1px solid var(--border); color: var(--muted); text-decoration: none; background: rgba(255,255,255,.03); transition: all .2s; font-family: var(--sans); cursor: pointer; display: inline-block; }
     .stage-link:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* ══ VEILLE ══ */
+    /* VEILLE */
     .veille-list { display: flex; flex-direction: column; gap: 1.2rem; }
-    .veille-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      display: grid;
-      grid-template-columns: 90px 1fr;
-      gap: 2rem;
-      align-items: start;
-      transition: border-color .25s, transform .25s, box-shadow .25s;
-      position: relative;
-      overflow: hidden;
-    }
-    .veille-item::after {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: rgba(255,255,255,0.5);
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform .3s;
-    }
+    .veille-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; display: grid; grid-template-columns: 90px 1fr; gap: 2rem; align-items: start; transition: border-color .25s, transform .25s, box-shadow .25s; position: relative; overflow: hidden; }
+    .veille-item::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: rgba(255,255,255,0.5); transform: scaleY(0); transform-origin: top; transition: transform .3s; }
     .veille-item:hover { border-color: rgba(255,255,255,.2); transform: translateX(4px); box-shadow: 0 10px 30px rgba(0,0,0,.3); }
     .veille-item:hover::after { transform: scaleY(1); }
     .veille-date { font-size: .65rem; text-transform: uppercase; letter-spacing: .1em; color: var(--accent2); line-height: 1.6; font-weight: 600; }
     .veille-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; }
     .veille-item p { font-size: .87rem; color: var(--muted); line-height: 1.7; }
-    .veille-tag { display: inline-block; margin-top: .75rem; font-size: .65rem; padding: .25rem .65rem; border-radius: 4px; background: rgba(255,255,255,.08); color: var(--accent); border: 1px solid rgba(255,255,255,.15); text-decoration: none; }
+    .veille-tag { display: inline-block; margin-top: .75rem; font-size: .65rem; padding: .25rem .65rem; border-radius: 4px; background: rgba(255,255,255,.08); color: var(--accent); border: 1px solid rgba(255,255,255,.15); text-decoration: none; margin-right: .4rem; }
 
-    /* ══ SYNTHÈSE ══ */
-    .synth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    .synth-block {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      transition: border-color .25s, box-shadow .25s;
-    }
+    /* SYNTHÈSE */
+    .synth-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: border-color .25s, box-shadow .25s; }
     .synth-block:hover { border-color: rgba(255,255,255,.2); box-shadow: 0 8px 25px rgba(0,0,0,.3); }
-    .synth-block.full { grid-column: 1 / -1; }
     .synth-block h3 { font-size: .65rem; text-transform: uppercase; letter-spacing: .18em; color: var(--accent2); margin-bottom: 1.2rem; }
     .synth-block > p { font-size: .9rem; color: var(--muted); line-height: 1.8; }
     .timeline { display: flex; flex-direction: column; }
-    .tl-item { display: grid; grid-template-columns: 90px 1fr; gap: 1.2rem; padding: .9rem 0; border-bottom: 1px solid var(--border); transition: background .2s; border-radius: 4px; }
+    .tl-item { display: grid; grid-template-columns: 120px 1fr; gap: 1.2rem; padding: .9rem 0; border-bottom: 1px solid var(--border); border-radius: 4px; }
     .tl-item:last-child { border-bottom: none; }
     .tl-date { font-size: .7rem; color: var(--accent2); font-weight: 600; padding-top: .1rem; }
     .tl-content h4 { font-size: .9rem; font-weight: 600; margin-bottom: .2rem; }
     .tl-content p { font-size: .8rem; color: var(--muted); line-height: 1.5; }
 
-    /* ══ STAGES ══ */
+    /* STAGES */
     .stages-list { display: flex; flex-direction: column; gap: 1.5rem; }
-    .stage-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 2rem;
-      align-items: start;
-      transition: border-color .25s, transform .25s;
-      position: relative;
-      overflow: hidden;
-    }
-    .stage-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; bottom: 0;
-      width: 3px;
-      background: rgba(255,255,255,0.4);
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform .3s;
-    }
+    .stage-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; display: grid; grid-template-columns: 140px 1fr; gap: 2rem; align-items: start; transition: border-color .25s, transform .25s; position: relative; overflow: hidden; }
+    .stage-card::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px; background: rgba(255,255,255,0.4); transform: scaleY(0); transform-origin: top; transition: transform .3s; }
     .stage-card:hover { border-color: rgba(255,255,255,.2); transform: translateX(4px); }
     .stage-card:hover::before { transform: scaleY(1); }
     .stage-date { font-size: .7rem; color: var(--accent2); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; line-height: 1.6; }
@@ -400,46 +202,22 @@
     .stage-desc { font-size: .87rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
     .stage-links { display: flex; gap: .75rem; flex-wrap: wrap; }
 
-    /* ══ FOOTER ══ */
-    .page-footer {
-      text-align: center;
-      padding: 1.5rem;
-      font-size: .68rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.15);
-      border-top: 1px solid var(--border);
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
-    }
+    /* FOOTER */
+    .page-footer { text-align: center; padding: 1.5rem; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.15); border-top: 1px solid var(--border); flex-shrink: 0; position: relative; z-index: 1; }
 
-    /* ══ RESPONSIVE ══ */
-    @media (max-width: 900px) {
-      .hero-info { grid-template-columns: 1fr 1fr; }
-    }
+    /* RESPONSIVE */
+    @media (max-width: 900px) { .hero-info { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 768px) {
       .content { padding: 3rem 2rem; }
       .real-grid { grid-template-columns: 1fr 1fr; }
       .synth-grid { grid-template-columns: 1fr; }
-      .synth-block.full { grid-column: 1; }
       .pres-grid { grid-template-columns: 1fr; }
       .stage-card { grid-template-columns: 1fr; gap: 1rem; }
     }
     @media (max-width: 480px) {
       html { scroll-padding-top: var(--header-h-mobile); }
-      nav {
-        padding: 0 1.2rem;
-        height: auto;
-        min-height: 56px;
-        flex-wrap: wrap;
-        gap: .5rem;
-      }
-      .nav-links {
-        display: none; flex-direction: column; width: 100%;
-        background: rgba(15,14,23,.98); border-top: 1px solid var(--border);
-        padding: .5rem 0; white-space: normal;
-      }
+      nav { padding: 0 1.2rem; height: auto; min-height: 56px; flex-wrap: wrap; gap: .5rem; }
+      .nav-links { display: none; flex-direction: column; width: 100%; background: rgba(15,14,23,.98); border-top: 1px solid var(--border); padding: .5rem 0; white-space: normal; }
       .nav-links.open { display: flex; }
       .burger { display: flex; }
       .nav-btn { width: 100%; text-align: left; border-radius: 0; padding: .85rem 1.2rem; border-bottom: 1px solid var(--border); }
@@ -453,19 +231,14 @@
       .tl-item { grid-template-columns: 70px 1fr; }
       .real-section-wrapper { padding: 1.2rem 1rem; }
     }
-    @media (max-width: 360px) {
-      .hero-info { grid-template-columns: 1fr; }
-      .content { padding: 2rem 1rem; }
-    }
+    @media (max-width: 360px) { .hero-info { grid-template-columns: 1fr; } .content { padding: 2rem 1rem; } }
 
-    /* Présentation */
+    /* PRÉSENTATION */
     .pres-grid { display: grid; grid-template-columns: 280px 1fr; gap: 2rem; align-items: start; }
     .pres-avatar { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem 2rem; text-align: center; }
     .avatar-circle { width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,.08); border: 2px solid var(--border); margin: 0 auto 1.2rem; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
     .pres-avatar h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: .3rem; }
-    .pres-avatar p { font-size: .8rem; color: var(--muted); margin-bottom: 1.5rem; }
-    .cv-btn { display: inline-block; padding: .7rem 1.5rem; border: 1px solid var(--border); border-radius: 8px; font-size: .8rem; color: var(--accent); text-decoration: none; background: rgba(255,255,255,.04); transition: background .2s, border-color .2s; cursor: pointer; font-family: var(--sans); }
-    .cv-btn:hover { background: rgba(255,255,255,.08); border-color: var(--accent); }
+    .pres-avatar p { font-size: .8rem; color: var(--muted); margin-bottom: 1.2rem; }
     .pres-content { display: flex; flex-direction: column; gap: 1.5rem; }
     .pres-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: border-color .25s; }
     .pres-block:hover { border-color: rgba(255,255,255,.2); }
@@ -496,9 +269,7 @@
   </nav>
   <div class="content">
     <div class="hero-eyebrow animate d1">BTS SIO · Bordeaux</div>
-    <div class="hero-title animate d2">
-      Portfolio —<br/><span class="line2">Salim</span>
-    </div>
+    <div class="hero-title animate d2">Portfolio —<br/><span class="line2">Salim</span></div>
     <div class="hero-sub animate d3">Lycée Gustave Eiffel · 2ème année · 2024 - 2026</div>
     <div class="hero-info animate d4">
       <div class="info-cell"><div class="info-label">Formation</div><div class="info-val">BTS SIO</div></div>
@@ -536,91 +307,36 @@
       <button class="nav-btn" onclick="goTo('synthese')">Synthèse</button>
     </div>
   </nav>
-
   <div class="content">
     <div class="page-header animate d1">
       <h1>Réalisations<br><span>professionnelles</span></h1>
       <p>Projets réalisés en cours, en stage ou en autonomie.</p>
     </div>
 
-    <!-- ✅ 1ère année : titre + espacement + grand rectangle -->
     <h2 class="page-subtitle animate d2">1ère année — 2024 / 2025</h2>
-
     <div class="real-section-wrapper animate d3">
       <div class="real-grid">
-        <div class="real-card">
-          <div class="real-num">AP 2.1</div>
-          <h3>AP 2.1</h3>
-          <p>Fiche de réalisation professionnelle AP 2.1.</p>
-          <div class="real-techs">
-            <a href="fiche-rp/ap2.1.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
-          </div>
-        </div>
-        <div class="real-card">
-          <div class="real-num">AP 2.2</div>
-          <h3>AP 2.2</h3>
-          <p>Fiche de réalisation professionnelle AP 2.2.</p>
-          <div class="real-techs">
-            <a href="fiche-rp/ap2.2.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
-          </div>
-        </div>
-        <div class="real-card">
-          <div class="real-num">AP 2.3</div>
-          <h3>AP 2.3</h3>
-          <p>Fiche de réalisation professionnelle AP 2.3.</p>
-          <div class="real-techs">
-            <a href="fiche-rp/ap2.3.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
-          </div>
-        </div>
-        <div class="real-card">
-          <div class="real-num">AP 2.4</div>
-          <h3>AP 2.4</h3>
-          <p>Fiche de réalisation professionnelle AP 2.4.</p>
-          <div class="real-techs">
-            <a href="fiche-rp/ap2.4.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
-          </div>
-        </div>
+        <div class="real-card"><div class="real-num">AP 2.1</div><h3>AP 2.1</h3><p>Fiche de réalisation professionnelle AP 2.1.</p><div class="real-techs"><a href="fiche-rp/ap2.1.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a></div></div>
+        <div class="real-card"><div class="real-num">AP 2.2</div><h3>AP 2.2</h3><p>Fiche de réalisation professionnelle AP 2.2.</p><div class="real-techs"><a href="fiche-rp/ap2.2.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a></div></div>
+        <div class="real-card"><div class="real-num">AP 2.3</div><h3>AP 2.3</h3><p>Fiche de réalisation professionnelle AP 2.3.</p><div class="real-techs"><a href="fiche-rp/ap2.3.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a></div></div>
+        <div class="real-card"><div class="real-num">AP 2.4</div><h3>AP 2.4</h3><p>Fiche de réalisation professionnelle AP 2.4.</p><div class="real-techs"><a href="fiche-rp/ap2.4.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a></div></div>
       </div>
     </div>
 
-    <!-- ✅ 2ème année : titre + espacement + grand rectangle -->
-    <h2 class="page-subtitle animate d4" style="margin-top: 3rem;">2ème année — 2025 / 2026</h2>
-
+    <h2 class="page-subtitle animate d4" style="margin-top:3rem;">2ème année — 2025 / 2026</h2>
     <div class="real-section-wrapper animate d5">
       <div class="real-grid">
-        <div class="real-card">
-          <div class="real-num">AP 3.1</div>
-          <h3>AP 3.1</h3>
-          <p>Fiche de réalisation professionnelle AP 3.1.</p>
-          <div class="real-techs">
-            <a href="fiche-rp/ap3.1.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
-          </div>
-        </div>
-        <div class="real-card">
-          <div class="real-num">AP 3.2</div>
-          <h3>AP 3.2</h3>
-          <p>Fiche de réalisation professionnelle AP 3.2.</p>
-          <div class="real-techs">
-            <a href="fiche-rp/ap3.2.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
-          </div>
-        </div>
+        <div class="real-card"><div class="real-num">AP 3.1</div><h3>AP 3.1</h3><p>Fiche de réalisation professionnelle AP 3.1.</p><div class="real-techs"><a href="fiche-rp/ap3.1.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a></div></div>
+        <div class="real-card"><div class="real-num">AP 3.2</div><h3>AP 3.2</h3><p>Fiche de réalisation professionnelle AP 3.2.</p><div class="real-techs"><a href="fiche-rp/ap3.2.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a></div></div>
       </div>
     </div>
 
-    <!-- ✅ Table de synthèse — pleine largeur, séparée -->
-    <div class="real-section-wrapper animate d6" style="margin-top: 1.5rem;">
-      <div class="real-card" style="grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;">
-        <div>
-          <div class="real-num">TS</div>
-          <h3 style="font-size: 1.3rem;">Table de synthèse</h3>
-          <p style="margin-bottom: 0;">Table de Synthèse SISR.</p>
-        </div>
-        <div class="real-techs">
-          <a href="fiche-rp/TS-sisr.pdf" target="_blank" class="stage-link" style="font-size:.85rem; padding:.5rem 1.4rem;">Voir la table de synthèse</a>
-        </div>
+    <div class="real-section-wrapper animate d6" style="margin-top:1.5rem;">
+      <div class="real-card" style="display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+        <div><div class="real-num">TS</div><h3 style="font-size:1.3rem;">Table de synthèse</h3><p style="margin-bottom:0;">Table de Synthèse SISR.</p></div>
+        <div class="real-techs"><a href="fiche-rp/TS-sisr.pdf" target="_blank" class="stage-link" style="font-size:.85rem;padding:.5rem 1.4rem;">Voir la table de synthèse</a></div>
       </div>
     </div>
-
   </div>
   <div class="page-footer">Salim · Portfolio BTS SIO · 2025</div>
 </div>
@@ -645,8 +361,7 @@
       <p>Thème : IA &amp; Cybersécurité — Suivi des menaces et innovations défensives.</p>
     </div>
 
-    <!-- Résumé court -->
-    <div class="synth-block animate d2" style="margin-bottom: 2.5rem; border-left: 3px solid rgba(200,191,239,0.5);">
+    <div class="synth-block animate d2" style="margin-bottom:2.5rem;border-left:3px solid rgba(200,191,239,0.5);">
       <h3>Résumé</h3>
       <p>L'IA amplifie les cyberattaques (phishing ciblé, malwares adaptatifs, exploitation automatisée) tout en dopant la défense via DevSecOps, Zero Trust et détection d'anomalies. Face à des intrusions de plus en plus rapides, maîtriser ces enjeux est indispensable pour tout technicien SISR.</p>
     </div>
@@ -656,55 +371,50 @@
         <div class="veille-date">Fév.<br/>2026</div>
         <div>
           <h3>L'IA transforme le paysage des menaces</h3>
-          <p>Selon le rapport State of AI Cybersecurity 2026 de Kiteworks (1 800 professionnels interrogés), 73 % des entreprises subissent déjà des attaques assistées par IA : phishing hyper-personnalisé, malwares adaptatifs, chaînes d'exploitation automatisées. Pourtant, seules 37 % disposent d'une politique formelle de gouvernance IA, créant un écart dangereux entre adoption et protection.</p>
+          <p>Selon le rapport State of AI Cybersecurity 2026 de Kiteworks (1 800 professionnels interrogés), 73 % des entreprises subissent déjà des attaques assistées par IA : phishing hyper-personnalisé, malwares adaptatifs, chaînes d'exploitation automatisées. Pourtant, seules 37 % disposent d'une politique formelle de gouvernance IA.</p>
           <a href="https://www.kiteworks.com/cybersecurity-risk-management/ai-cybersecurity-2026-trends-report/" target="_blank" class="veille-tag">Source : Kiteworks — State of AI Cybersecurity 2026</a>
         </div>
       </div>
-
       <div class="veille-item animate d3">
         <div class="veille-date">Mars<br/>2026</div>
         <div>
           <h3>DevSecOps : la sécurité intégrée devient la norme</h3>
-          <p>Le rapport State of DevSecOps 2026 de Datadog révèle que 87 % des organisations ont au moins une vulnérabilité exploitable connue dans leurs services en production. La réponse s'organise autour du DevSecOps : intégration de scanners automatiques (SAST, DAST) dans les pipelines CI/CD, analyse des dépendances et sécurisation de la supply chain logicielle. L'IA joue désormais un rôle actif de détection et de correction des failles avant déploiement.</p>
-          <a href="https://www.helpnetsecurity.com/2026/03/02/devsecops-supply-chain-risk-security-debt/" target="_blank" class="veille-tag">Source : Datadog State of DevSecOps 2026 — Help Net Security</a>
+          <p>Le rapport State of DevSecOps 2026 de Datadog révèle que 87 % des organisations ont au moins une vulnérabilité exploitable en production. La réponse s'organise autour du DevSecOps : scanners automatiques dans les pipelines CI/CD, analyse des dépendances, sécurisation de la supply chain. L'IA joue un rôle actif de détection et correction avant déploiement.</p>
+          <a href="https://www.helpnetsecurity.com/2026/03/02/devsecops-supply-chain-risk-security-debt/" target="_blank" class="veille-tag">Source : Datadog State of DevSecOps 2026</a>
         </div>
       </div>
-
       <div class="veille-item animate d4">
         <div class="veille-date">Fév.<br/>2026</div>
         <div>
           <h3>L'IA accélère les attaques : les chiffres clés</h3>
-          <p>Le CrowdStrike Global Threat Report 2026 confirme que le temps de rupture moyen (accès initial vers mouvement latéral) est tombé à 29 minutes, soit 65 % plus rapide qu'en 2024. Le record absolu : 27 secondes. Les attaques pilotées par IA ont augmenté de 89 % sur un an. Dans l'une des intrusions documentées, l'exfiltration de données a débuté 4 minutes après l'accès initial. La défense humaine seule ne suffit plus.</p>
+          <p>Le CrowdStrike Global Threat Report 2026 confirme que le temps de rupture moyen est tombé à 29 minutes, soit 65 % plus rapide qu'en 2024, avec un record absolu à 27 secondes. Les attaques pilotées par IA ont augmenté de 89 % sur un an. La défense humaine seule ne suffit plus.</p>
           <a href="https://www.crowdstrike.com/en-us/global-threat-report/" target="_blank" class="veille-tag">Source : CrowdStrike Global Threat Report 2026</a>
         </div>
       </div>
-
       <div class="veille-item animate d4">
         <div class="veille-date">Jan.<br/>2026</div>
         <div>
           <h3>Évolution des attaques les plus fréquentes</h3>
-          <p>CrowdStrike et Euronews documentent une forte hausse des ransomwares multi-étapes (chiffrement + exfiltration + menace de divulgation), du spear-phishing contextuel alimenté par IA, et des attaques sur la supply chain logicielle. L'Europe représente 22 % des attaques ransomware mondiales, avec 3,2 millions d'attaques DDoS recensées sur la première partie de l'année dans la région EMEA.</p>
+          <p>Forte hausse des ransomwares multi-étapes (chiffrement + exfiltration + menace de divulgation), du spear-phishing contextuel alimenté par IA, et des attaques sur la supply chain logicielle. L'Europe représente 22 % des attaques ransomware mondiales, avec 3,2 millions d'attaques DDoS recensées en EMEA.</p>
           <a href="https://www.crowdstrike.com/en-us/global-threat-report/" target="_blank" class="veille-tag">Source : CrowdStrike 2026</a>
-          <a href="https://fr.euronews.com/next/2026/01/12/cybersecurite-2026-des-intrusions-liees-a-lia-aux-menaces-geopolitiques-croissantes" target="_blank" class="veille-tag" style="margin-left:.5rem;">Source : Euronews 2026</a>
+          <a href="https://fr.euronews.com/next/2026/01/12/cybersecurite-2026-des-intrusions-liees-a-lia-aux-menaces-geopolitiques-croissantes" target="_blank" class="veille-tag">Source : Euronews 2026</a>
         </div>
       </div>
-
       <div class="veille-item animate d5">
         <div class="veille-date">2026</div>
         <div>
           <h3>Innovations défensives clés</h3>
-          <p>En réponse à l'accélération des menaces, les entreprises adoptent le modèle Zero Trust généralisé, l'IA défensive pour la détection d'anomalies comportementales, la segmentation automatique des réseaux, et l'automatisation de la réponse aux incidents. Les tests d'intrusion continus intégrés aux pipelines DevOps (shift-left security) deviennent la norme dans les environnements cloud-natifs.</p>
+          <p>Les entreprises adoptent le Zero Trust généralisé, l'IA défensive pour la détection d'anomalies comportementales, la segmentation automatique des réseaux et l'automatisation de la réponse aux incidents. Les tests d'intrusion continus intégrés aux pipelines DevOps (shift-left security) deviennent la norme.</p>
           <a href="https://focus-corporation.com/fr/cybersecurity-trends-pour-2026/" target="_blank" class="veille-tag">Source : Focus Corporation — Cybersecurity trends 2026</a>
         </div>
       </div>
-
       <div class="veille-item animate d5">
         <div class="veille-date">2026</div>
         <div>
           <h3>Souveraineté numérique &amp; réglementation européenne</h3>
-          <p>L'UE renforce son arsenal réglementaire avec NIS2 (résilience cyber pour les entités essentielles), DORA (résilience opérationnelle du secteur financier) et l'AI Act (pleinement applicable à partir du 2 août 2026). Face à la dépendance aux clouds américains — plus de 45 % des entreprises européennes utilisent des services cloud majoritairement non-européens — la souveraineté numérique devient un impératif stratégique.</p>
-          <a href="https://antares.fr/blog/infogerance/souverainete-numerique-leurope-accelere-face-aux-tensions-geopolitiques-et-a-la-dependance-cloud/" target="_blank" class="veille-tag">Source : Antares.fr — Souveraineté numérique 2026</a>
-          <a href="https://www.haas-avocats.com/non-categorise/souverainete-numerique-reduire-les-risques-avec-dora-data-et-ia-act/" target="_blank" class="veille-tag" style="margin-left:.5rem;">Source : Haas Avocats — DORA, NIS2, IA Act</a>
+          <p>L'UE renforce son arsenal avec NIS2, DORA et l'AI Act (applicable au 2 août 2026). Face à la dépendance aux clouds non-européens — plus de 45 % des entreprises de l'UE — la souveraineté numérique devient un impératif stratégique.</p>
+          <a href="https://antares.fr/blog/infogerance/souverainete-numerique-leurope-accelere-face-aux-tensions-geopolitiques-et-a-la-dependance-cloud/" target="_blank" class="veille-tag">Source : Antares.fr</a>
+          <a href="https://www.haas-avocats.com/non-categorise/souverainete-numerique-reduire-les-risques-avec-dora-data-et-ia-act/" target="_blank" class="veille-tag">Source : Haas Avocats — DORA, NIS2, IA Act</a>
         </div>
       </div>
     </div>
@@ -734,48 +444,24 @@
     <div class="synth-block animate d3">
       <h3>Compétences acquises</h3>
       <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-date">Compétence</div>
-          <div class="tl-content"><h4>Linux / Debian</h4><p>Administration, configuration, gestion des services.</p></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">Compétence</div>
-          <div class="tl-content"><h4>Python</h4><p>Scripting, automatisation, logique de programmation.</p></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">Compétence</div>
-          <div class="tl-content"><h4>À compléter</h4><p>Décris une autre compétence clé.</p></div>
-        </div>
+        <div class="tl-item"><div class="tl-date">Compétence</div><div class="tl-content"><h4>Linux / Debian</h4><p>Administration, configuration, gestion des services.</p></div></div>
+        <div class="tl-item"><div class="tl-date">Compétence</div><div class="tl-content"><h4>Python</h4><p>Scripting, automatisation, logique de programmation.</p></div></div>
+        <div class="tl-item"><div class="tl-date">Compétence</div><div class="tl-content"><h4>À compléter</h4><p>Décris une autre compétence clé.</p></div></div>
       </div>
     </div>
     <div class="synth-block animate d4" style="margin-top:1.5rem;">
       <h3>Parcours</h3>
       <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-date">Septembre 2024</div>
-          <div class="tl-content"><h4>Entrée en BTS</h4><p>Lycée Gustave Eiffel, Bordeaux.</p></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">2025 - 2026</div>
-          <div class="tl-content"><h4>Stage / projet</h4><p>À compléter avec ton expérience.</p></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">Sept. 2024 - 2025</div>
-          <div class="tl-content"><h4>1ère année</h4><p>Découverte des spécialités SLAM/SISR. Choix SISR.</p></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">Sept. 2025 - 2026</div>
-          <div class="tl-content"><h4>2ème année</h4><p>Approfondissement réseau et système, montée en autonomie.</p></div>
-        </div>
+        <div class="tl-item"><div class="tl-date">Sept. 2024</div><div class="tl-content"><h4>Entrée en BTS</h4><p>Lycée Gustave Eiffel, Bordeaux.</p></div></div>
+        <div class="tl-item"><div class="tl-date">Sept. 2024 – 2025</div><div class="tl-content"><h4>1ère année</h4><p>Découverte des spécialités SLAM/SISR. Choix SISR.</p></div></div>
+        <div class="tl-item"><div class="tl-date">Sept. 2025 – 2026</div><div class="tl-content"><h4>2ème année</h4><p>Approfondissement réseau et système, montée en autonomie.</p></div></div>
       </div>
     </div>
     <div class="real-card animate d5" style="margin-top:1.5rem;">
       <div class="real-num">TS</div>
       <h3>Table de Synthèse</h3>
       <p>Table de Synthèse SISR.</p>
-      <div class="real-techs">
-        <a href="fiche-rp/TS-sisr.pdf" target="_blank" class="stage-link">Voir la table de synthèse</a>
-      </div>
+      <div class="real-techs"><a href="fiche-rp/TS-sisr.pdf" target="_blank" class="stage-link">Voir la table de synthèse</a></div>
     </div>
   </div>
   <div class="page-footer">Salim Salim · Portfolio BTS · 2025</div>
@@ -802,30 +488,16 @@
     </div>
     <div class="pres-grid animate d2">
       <div class="pres-avatar">
-        <div class="avatar-circle">👤</div>
+        <div class="avatar-circle">&#128100;</div>
         <h2>Salim Salim</h2>
-        <p style="margin-bottom:1.2rem;">Étudiant BTS SIO<br/>Lycée Gustave Eiffel<br/>Bordeaux</p>
-
-        <div style="text-align:left; border-top:1px solid var(--border); padding-top:1.2rem; margin-bottom:1.2rem; display:flex; flex-direction:column; gap:.75rem;">
-          <div>
-            <div style="font-size:.58rem; text-transform:uppercase; letter-spacing:.15em; color:var(--accent2); margin-bottom:.2rem;">Option</div>
-            <div style="font-size:.85rem; font-weight:600;">SISR</div>
-          </div>
-          <div>
-            <div style="font-size:.58rem; text-transform:uppercase; letter-spacing:.15em; color:var(--accent2); margin-bottom:.2rem;">Année</div>
-            <div style="font-size:.85rem; font-weight:600;">2024 — 2026</div>
-          </div>
-          <div>
-            <div style="font-size:.58rem; text-transform:uppercase; letter-spacing:.15em; color:var(--accent2); margin-bottom:.2rem;">Spécialité</div>
-            <div style="font-size:.85rem; font-weight:600;">Systèmes &amp; Réseaux</div>
-          </div>
-          <div>
-            <div style="font-size:.58rem; text-transform:uppercase; letter-spacing:.15em; color:var(--accent2); margin-bottom:.2rem;">Certifications</div>
-            <div style="font-size:.85rem; font-weight:600;">PIX · SecNumAcadémie</div>
-          </div>
+        <p>Étudiant BTS SIO<br/>Lycée Gustave Eiffel<br/>Bordeaux</p>
+        <div style="text-align:left;border-top:1px solid var(--border);padding-top:1.2rem;margin-bottom:1.2rem;display:flex;flex-direction:column;gap:.75rem;">
+          <div><div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent2);margin-bottom:.2rem;">Option</div><div style="font-size:.85rem;font-weight:600;">SISR</div></div>
+          <div><div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent2);margin-bottom:.2rem;">Année</div><div style="font-size:.85rem;font-weight:600;">2024 — 2026</div></div>
+          <div><div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent2);margin-bottom:.2rem;">Spécialité</div><div style="font-size:.85rem;font-weight:600;">Systèmes &amp; Réseaux</div></div>
+          <div><div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent2);margin-bottom:.2rem;">Certifications</div><div style="font-size:.85rem;font-weight:600;">PIX · SecNumAcadémie</div></div>
         </div>
-
-        <a href="fiche-rp/cv_salim.pdf" target="_blank" class="stage-link" style="width:100%; text-align:center; display:block;">Consulter mon CV</a>
+        <a href="fiche-rp/cv_salim.pdf" target="_blank" class="stage-link" style="width:100%;text-align:center;display:block;">Consulter mon CV</a>
       </div>
       <div class="pres-content">
         <div class="pres-block animate d3">
@@ -845,30 +517,25 @@
           <h3>Formation</h3>
           <p>BTS SIO (Services Informatiques aux Organisations) — 2ème année au Lycée Gustave Eiffel, Bordeaux. Option SISR (Solutions d'Infrastructure, Systèmes et Réseaux).</p>
         </div>
-
-        <!-- Certifications -->
-        <div class="pres-block animate d6" style="margin-top: 0;">
+        <div class="pres-block animate d6">
           <h3>Certifications</h3>
-          <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: .5rem;">
-
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.2rem; background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 10px; transition: border-color .2s;" onmouseover="this.style.borderColor='rgba(255,255,255,.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,.1)'">
+          <div style="display:flex;flex-direction:column;gap:1rem;margin-top:.5rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:1rem 1.2rem;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;transition:border-color .2s;" onmouseover="this.style.borderColor='rgba(255,255,255,.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,.1)'">
               <div>
-                <div style="font-size:.62rem; text-transform:uppercase; letter-spacing:.15em; color:var(--accent2); margin-bottom:.3rem;">PIX</div>
-                <div style="font-size:.9rem; font-weight:700; margin-bottom:.2rem;">Certification PIX</div>
-                <div style="font-size:.8rem; color:var(--muted);">Compétences numériques : sécurité, gestion de données, communication professionnelle.</div>
+                <div style="font-size:.62rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent2);margin-bottom:.3rem;">PIX</div>
+                <div style="font-size:.9rem;font-weight:700;margin-bottom:.2rem;">Certification PIX</div>
+                <div style="font-size:.8rem;color:var(--muted);">Compétences numériques : sécurité, gestion de données, communication professionnelle.</div>
               </div>
-              <a href="fiche-rp/certificat-pix.pdf" target="_blank" class="stage-link" style="margin-left:1.5rem; white-space:nowrap; flex-shrink:0;">Voir le certificat</a>
+              <a href="fiche-rp/certificat-pix.pdf" target="_blank" class="stage-link" style="margin-left:1.5rem;white-space:nowrap;flex-shrink:0;">Voir le certificat</a>
             </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.2rem; background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 10px; transition: border-color .2s;" onmouseover="this.style.borderColor='rgba(255,255,255,.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,.1)'">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:1rem 1.2rem;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;transition:border-color .2s;" onmouseover="this.style.borderColor='rgba(255,255,255,.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,.1)'">
               <div>
-                <div style="font-size:.62rem; text-transform:uppercase; letter-spacing:.15em; color:var(--accent2); margin-bottom:.3rem;">ANSSI</div>
-                <div style="font-size:.9rem; font-weight:700; margin-bottom:.2rem;">MOOC SecNumAcadémie</div>
-                <div style="font-size:.8rem; color:var(--muted);">Cybersécurité : protection des SI, hygiène informatique, gestion des risques et des menaces.</div>
+                <div style="font-size:.62rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent2);margin-bottom:.3rem;">ANSSI</div>
+                <div style="font-size:.9rem;font-weight:700;margin-bottom:.2rem;">MOOC SecNumAcadémie</div>
+                <div style="font-size:.8rem;color:var(--muted);">Cybersécurité : protection des SI, hygiène informatique, gestion des risques et des menaces.</div>
               </div>
-              <a href="fiche-rp/certificat-anssi.pdf" target="_blank" class="stage-link" style="margin-left:1.5rem; white-space:nowrap; flex-shrink:0;">Voir le certificat</a>
+              <a href="fiche-rp/certificat-anssi.pdf" target="_blank" class="stage-link" style="margin-left:1.5rem;white-space:nowrap;flex-shrink:0;">Voir le certificat</a>
             </div>
-
           </div>
         </div>
       </div>
@@ -904,8 +571,8 @@
           <div class="stage-poste">Support IT — Administration Système</div>
           <p class="stage-desc">Stage de 5 semaines au service informatique d'Ynov Campus. Missions axées sur l'administration système : gestion du parc informatique, configuration des postes et support utilisateurs.</p>
           <div class="stage-links">
-            <a href="fiche-rp/fiche-rp-stage1.pdf" target="_blank" class="stage-link">Fiche RP - Stage 1ère année</a>
-            <a href="https://www.ynov.com" target="_blank" class="stage-link">🔗 Site Ynov Campus</a>
+            <a href="fiche-rp/fiche-rp-stage1.pdf" target="_blank" class="stage-link">Fiche RP — Stage 1ère année</a>
+            <a href="https://www.ynov.com" target="_blank" class="stage-link">Site Ynov Campus</a>
           </div>
         </div>
       </div>
@@ -916,49 +583,14 @@
           <div class="stage-poste">Support IT — Rédaction de procédures</div>
           <p class="stage-desc">Stage de 8 semaines chez Ynov Campus. Missions principalement orientées rédaction et formalisation de procédures techniques pour documenter les processus informatiques internes.</p>
           <div class="stage-links">
-            <a href="fiche-rp/fiche-rp-stage2.pdf" target="_blank" class="stage-link">Fiche RP - Stage 2ème année</a>
-            <a href="https://www.ynov.com" target="_blank" class="stage-link">🔗 Site Ynov Campus</a>
+            <a href="fiche-rp/fiche-rp-stage2.pdf" target="_blank" class="stage-link">Fiche RP — Stage 2ème année</a>
+            <a href="https://www.ynov.com" target="_blank" class="stage-link">Site Ynov Campus</a>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="page-footer">Salim Salim · Portfolio BTS · 2025</div>
-</div>
-
-
-    <!-- Résumé -->
-    <div class="synth-block animate d2" style="margin-bottom: 2.5rem; border-left: 3px solid rgba(200,191,239,0.5);">
-      <h3>Résumé</h3>
-      <p>J'ai obtenu deux certifications reconnues : la certification PIX, qui valide mes compétences numériques essentielles, et le MOOC SecNumAcadémie proposé par l'ANSSI. Ces certifications renforcent mon profil en tant qu'étudiant en BTS SIO option SISR et témoignent de mon engagement dans l'acquisition de compétences essentielles au domaine de la cybersécurité.</p>
-    </div>
-
-    <!-- Cartes certifications dans un grand rectangle -->
-    <div class="real-section-wrapper animate d3">
-      <div class="real-grid">
-
-        <div class="real-card">
-          <div class="real-num">PIX</div>
-          <h3>Certification PIX</h3>
-          <p>Validation officielle des compétences numériques : sécurité informatique, gestion de données, recherche d'information, communication professionnelle et résolution de problèmes techniques.</p>
-          <div class="real-techs">
-            <a href="fiche-rp/certificat-pix.pdf" target="_blank" class="stage-link">Voir le certificat</a>
-          </div>
-        </div>
-
-        <div class="real-card">
-          <div class="real-num">ANSSI</div>
-          <h3>MOOC SecNumAcadémie</h3>
-          <p>Formation officielle de l'ANSSI dédiée aux fondamentaux de la cybersécurité : protection des systèmes d'information, hygiène informatique, gestion des risques, sécurité des réseaux et sensibilisation aux menaces.</p>
-          <div class="real-techs">
-            <a href="https://secnumacademie.gouv.fr" target="_blank" class="stage-link">Site SecNumAcadémie</a>
-            <a href="fiche-rp/certificat-anssi.pdf" target="_blank" class="stage-link">Voir le certificat</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
 </div>
 
 <script>
@@ -984,27 +616,19 @@
     if (links) links.classList.toggle('open');
   }
 
-  document.getElementById('page-accueil').classList.add('entering');
-
-  /* Particles */
   const canvas = document.getElementById('particles');
   const ctx    = canvas.getContext('2d');
   let W, H, particles = [];
 
-  function resize() {
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
   resize();
   window.addEventListener('resize', resize);
 
   function Particle() {
-    this.x  = Math.random() * W;
-    this.y  = Math.random() * H;
-    this.r  = Math.random() * 1.5 + 0.3;
-    this.vx = (Math.random() - 0.5) * 0.3;
-    this.vy = (Math.random() - 0.5) * 0.3;
-    this.a  = Math.random() * 0.5 + 0.1;
+    this.x = Math.random() * W; this.y = Math.random() * H;
+    this.r = Math.random() * 1.5 + 0.3;
+    this.vx = (Math.random() - 0.5) * 0.3; this.vy = (Math.random() - 0.5) * 0.3;
+    this.a = Math.random() * 0.5 + 0.1;
     const hues = [270, 280, 260, 250];
     this.hue = hues[Math.floor(Math.random() * hues.length)];
   }
@@ -1014,10 +638,8 @@
     if (this.y < 0) this.y = H; if (this.y > H) this.y = 0;
   };
   Particle.prototype.draw = function() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-    ctx.fillStyle = `hsla(${this.hue}, 30%, 90%, ${this.a})`;
-    ctx.fill();
+    ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = `hsla(${this.hue}, 30%, 90%, ${this.a})`; ctx.fill();
   };
 
   for (let i = 0; i < 90; i++) particles.push(new Particle());
@@ -1033,8 +655,7 @@
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
           ctx.strokeStyle = `rgba(220,215,255,${0.07 * (1 - dist/100)})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
+          ctx.lineWidth = 0.5; ctx.stroke();
         }
       }
     }
