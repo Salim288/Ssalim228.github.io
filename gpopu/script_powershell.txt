@@ -1,0 +1,78 @@
+﻿# Charger le module Active Directory pour utiliser les commandes AD
+Import-Module ActiveDirectory
+
+# Importer les données du fichier CSV contenant les utilisateurs et les groupes
+$utilisateurs = Import-Csv "C:\script\liste_utilisateur.csv" -Delimiter ";"
+
+# --- Partie 1 : Création des groupes ---
+
+# Extraire tous les noms de groupes uniques depuis la colonne 7 du CSV
+$groupes = $utilisateurs | Select-Object -ExpandProperty Column7 | Sort-Object -Unique
+
+# Boucle pour chaque groupe trouvé
+foreach ($groupe in $groupes) {
+    {
+        if (-not (Get-ADGroup -Filter "Name -eq '$($groupe)'" -ErrorAction SilentlyContinue)) { #elle recherche dans Active Directory un groupe dont le nom est exactement égal à la valeur de $groupe.
+            New-ADGroup -Name $groupe -SamAccountName $groupe -GroupScope Global -GroupCategory Security
+            Write-Host "Groupe créé : $groupe"
+        } else {
+            Write-Host "Groupe déjà existant : $groupe"
+        }
+    }
+}
+
+# --- Partie 2 : Création des utilisateurs ---
+
+foreach ($ligne in $utilisateurs) {
+    $Nom = $ligne.Column2           
+    $Prenom = $ligne.Column3        
+    $Login = $ligne.Column1         
+    $MotDePasse = $ligne.Column6    
+    $NomComplet = $ligne.Column5    
+
+  
+
+    # Convertir le mot de passe en format sécurisé pour AD
+    $SecurePassword = ConvertTo-SecureString $MotDePasse -AsPlainText -Force
+
+    # Vérifie si l'utilisateur existe déjà dans Active Directory
+    if (-not (Get-ADUser -Identity $Login -ErrorAction SilentlyContinue)) {
+        New-ADUser -Name $NomComplet `
+                   -SamAccountName $Login `
+                   -GivenName $Prenom `
+                   -Surname $Nom `
+                   -AccountPassword $SecurePassword `
+                   -Enabled $true
+        Write-Host "Utilisateur créé : $NomComplet"
+    } else {
+        Write-Host "Utilisateur déjà existant : $Login"
+    }
+}
+
+# --- Partie 3 : Vérification et ajout des utilisateurs dans leur groupe ---
+
+foreach ($ligne in $utilisateurs) {
+    $Login = $ligne.Column1      # Identifiant de l'utilisateur
+    $Groupe = $ligne.Column7     # Nom du groupe
+
+    # Vérifie que les champs nécessaires ne sont pas vides
+   
+
+    # Récupère le DN du groupe pour le filtre
+    $groupeDN = (Get-ADGroup -Identity $Groupe -ErrorAction SilentlyContinue).DistinguishedName
+    if ($null -eq $groupeDN) { #Elle récupère le chemin LDAP complet (Distinguished Name) du groupe nommé $Groupe dans Active Directory, ou renvoie $null si le groupe n'existe pas ou est introuvable.
+        Write-Host "Groupe introuvable : $Groupe"
+        continue
+    }
+
+    # Récupère l'utilisateur avec ses groupes
+    $utilisateur = Get-ADUser -Identity $Login -Properties MemberOf
+
+    # Vérifie s'il est déjà membre
+    if ($utilisateur.MemberOf -contains $groupeDN) { # Elle vérifie si l’utilisateur est déjà membre du groupe dont le DN est $groupeDN.
+        Write-Host "$Login est déjà membre du groupe $Groupe"
+    } else {
+        Add-ADGroupMember -Identity $Groupe -Members $Login
+        Write-Host "$Login ajouté au groupe $Groupe"
+    }
+}
