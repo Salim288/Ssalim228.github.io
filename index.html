@@ -156,13 +156,13 @@
     }
     .real-section-wrapper::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(200,191,239,0.4), transparent); border-radius: 16px 16px 0 0; }
     .real-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.2rem; width: 100%; }
-    .real-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; position: relative; overflow: hidden; transition: transform .3s, border-color .3s, box-shadow .3s; cursor: default; }
+    .real-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; position: relative; overflow: hidden; transition: transform .3s, border-color .3s, box-shadow .3s; cursor: default; }
     .real-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.7); transform: scaleX(0); transform-origin: left; transition: transform .4s; }
     .real-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,.2); box-shadow: 0 20px 40px rgba(0,0,0,.4), 0 0 30px rgba(255,255,255,.05); }
     .real-card:hover::before { transform: scaleX(1); }
-    .real-num { font-size: .6rem; letter-spacing: .2em; color: var(--accent2); text-transform: uppercase; margin-bottom: 1.2rem; }
-    .real-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .6rem; }
-    .real-card p { font-size: .87rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.2rem; }
+    .real-num { font-size: .6rem; letter-spacing: .2em; color: var(--accent2); text-transform: uppercase; margin-bottom: .5rem; }
+    .real-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .3rem; }
+    .real-card p { font-size: .87rem; color: var(--muted); line-height: 1.7; margin-bottom: .6rem; }
     .real-techs { display: flex; gap: .4rem; flex-wrap: wrap; }
     .stage-link, .real-tech { font-size: .72rem; padding: .35rem .9rem; border-radius: 6px; border: 1px solid var(--border); color: var(--muted); text-decoration: none; background: rgba(255,255,255,.03); transition: all .2s; font-family: var(--sans); cursor: pointer; display: inline-block; }
     .stage-link:hover { border-color: var(--accent); color: var(--accent); }
