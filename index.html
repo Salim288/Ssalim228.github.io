@@ -146,6 +146,7 @@
       background: linear-gradient(90deg, transparent, rgba(200,191,239,0.4), transparent);
     }
 
+    /* ★ 2 colonnes fixes ★ */
     .real-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -169,6 +170,7 @@
     .real-card p { font-size: .87rem; color: var(--muted); line-height: 1.7; margin-bottom: .8rem; }
     .real-techs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .real-techs.single { display: flex; flex-wrap: wrap; gap: 6px; }
+    .real-techs.single .stage-link { width: auto; }
 
     .stage-link {
       font-size: .72rem; padding: .35rem .9rem; border-radius: 6px;
@@ -470,32 +472,35 @@
     <div class="real-section-wrapper animate d3">
       <div class="real-grid">
 
+        <!-- AP 2.1 : colonne gauche -->
         <div class="real-card">
           <div class="real-num">AP 2.1</div>
           <h3>AP 2.1</h3>
           <p>Livrables AP 2.1.</p>
           <div class="real-techs">
-            <a href="fiche-rp/ap2.2.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
+            <a href="fiche-rp/ap2.1.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
             <a href="strifers11/guide_installation_nextcloud.pdf" target="_blank" class="stage-link">Documentation Installation NextCloud</a>
             <a href="strifers11/guide_utilisation_nextcloud.pdf" target="_blank" class="stage-link">Documentation Utilisation NextCloud</a>
             <a href="strifers11/tutoriel_dns.pdf" target="_blank" class="stage-link">Documentation DNS</a>
-            <a href="strifers11/journal_strife.pdf" target="_blank" class="stage-link">Journal de bord</a>
+            <a href="strifers11/journal_de_bord.pdf" target="_blank" class="stage-link">Journal de bord</a>
           </div>
         </div>
 
-       <div class="real-card">
+        <!-- AP 2.2 -->
+        <div class="real-card">
           <div class="real-num">AP 2.2</div>
           <h3>AP 2.2</h3>
           <p>Livrables AP 2.2.</p>
           <div class="real-techs">
-            <a href="fiche-rp/ap2.1.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
+            <a href="fiche-rp/ap2.2.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
             <a href="godzilla/fiche_comparaison_fog.pdf" target="_blank" class="stage-link">Fiche comparaison</a>
             <a href="godzilla/installation_fog.pdf" target="_blank" class="stage-link">Documentation FOG</a>
             <a href="godzilla/journal_fog.pdf" target="_blank" class="stage-link">Journal de bord</a>
           </div>
         </div>
 
-         <div class="real-card">
+        <!-- AP 2.3 -->
+        <div class="real-card">
           <div class="real-num">AP 2.3</div>
           <h3>AP 2.3</h3>
           <p>Livrables AP 2.3.</p>
@@ -510,6 +515,7 @@
           </div>
         </div>
 
+        <!-- AP 2.4 -->
         <div class="real-card">
           <div class="real-num">AP 2.4</div>
           <h3>AP 2.4</h3>
@@ -528,9 +534,10 @@
 
     <h2 class="page-subtitle animate d4" style="margin-top:3rem;">2ème année — 2025 / 2026</h2>
     <div class="real-section-wrapper animate d5">
-      <div class="real-grid">
+      <div class="real-grid" style="grid-template-columns: repeat(3, 1fr);">
 
-        <div class="real-card" style="grid-column: 1 / -1;">
+        <!-- AP 3.1 -->
+        <div class="real-card">
           <div class="real-num">AP 3.1</div>
           <h3>AP 3.1</h3>
           <p>Livrables AP 3.1.</p>
@@ -538,20 +545,21 @@
             <a href="fiche-rp/ap3.1.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
             <a href="navajo/documentation_extralab.pdf" target="_blank" class="stage-link">Documentation Extralab</a>
             <a href="navajo/fiche_recette_navajo.pdf" target="_blank" class="stage-link">Fiche recette</a>
-            <a href="navajo/journal_navajo.pdf" target="_blank" class="stage-link">Journal de bord</a>
+            <a href="navajo/journal_de_bord_extralab.pdf" target="_blank" class="stage-link">Journal de bord</a>
             <a href="navajo/fiche_bilan.pdf" target="_blank" class="stage-link">Fiche Bilan</a>
             <a href="navajo/grille_analyse" target="_blank" class="stage-link">Grille d'analyse</a>
           </div>
         </div>
 
-        <div class="real-card" style="grid-column: 1 / -1;">
+        <!-- AP 3.2 -->
+        <div class="real-card">
           <div class="real-num">AP 3.2</div>
           <h3>AP 3.2</h3>
           <p>Livrables AP 3.2.</p>
           <div class="real-techs">
             <a href="fiche-rp/ap3.2.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
             <a href="gpopu/documentation_mise_en_oeuvre_gpo.pdf" target="_blank" class="stage-link">Documentation mise en oeuvre GPO</a>
-            <a href="gpopu/journal_gpo.pdf" target="_blank" class="stage-link">Journal de bord</a>
+            <a href="gpopu/journal_de_bord_salim.pdf" target="_blank" class="stage-link">Journal de bord</a>
             <a href="gpopu/matrice_de_gpo.pdf" target="_blank" class="stage-link">Matrice de GPO</a>
             <a href="gpopu/structure_annuaire_salim.pdf" target="_blank" class="stage-link">Structure annuaire</a>
             <a href="gpopu/tutoriel_de_sauvegarde.pdf" target="_blank" class="stage-link">Tutoriel de sauvegarde</a>
@@ -559,7 +567,8 @@
           </div>
         </div>
 
-        <div class="real-card" style="grid-column: 1 / -1;">
+        <!-- AP 4.1 -->
+        <div class="real-card">
           <div class="real-num">AP 4.1</div>
           <h3>AP 4.1</h3>
           <p>Livrables AP 4.1.</p>
@@ -567,7 +576,7 @@
             <a href="fiche-rp/ap4.1.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
             <a href="dmz/Bgtw.pdf" target="_blank" class="stage-link">Documentation Bgtw</a>
             <a href="dmz/Fiche Recette.pdf" target="_blank" class="stage-link">Fiche recette</a>
-            <a href="dmz/journal_dmz.pdf" target="_blank" class="stage-link">Journal de bord</a>
+            <a href="dmz/Journal de bord salim.pdf" target="_blank" class="stage-link">Journal de bord</a>
             <a href="dmz/schema_reseau_logique.pdf" target="_blank" class="stage-link">Schéma réseau logique</a>
             <a href="dmz/config-Bgtw1.m2l.fr-20260207150726.xml" target="_blank" class="stage-link">Configuration Bgtw</a>
           </div>
