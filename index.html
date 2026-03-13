@@ -33,7 +33,6 @@
 
     #particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
-    /* ── PAGES ── */
     .page {
       display: none;
       min-height: 100vh;
@@ -49,17 +48,12 @@
       from { opacity: 0; transform: translateY(28px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    @keyframes slideRight {
-      from { opacity: 0; transform: translateX(-28px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
     .animate {
       opacity: 0;
       animation: fadeUp 0.55s ease forwards;
       animation-play-state: paused;
     }
     .page.entering .animate { animation-play-state: running; }
-    .animate.slide { animation-name: slideRight; }
     .d1 { animation-delay: .05s; }
     .d2 { animation-delay: .15s; }
     .d3 { animation-delay: .25s; }
@@ -67,14 +61,10 @@
     .d5 { animation-delay: .45s; }
     .d6 { animation-delay: .55s; }
 
-    /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
+      position: fixed; top: 0; left: 0; right: 0;
       height: var(--header-h);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: flex; justify-content: space-between; align-items: center;
       padding: 0 3rem;
       background: rgba(15,14,23,0.85);
       backdrop-filter: blur(16px);
@@ -87,17 +77,14 @@
       background: none; border: none; cursor: pointer;
       font-family: var(--sans); font-size: .88rem;
       color: var(--muted); padding: .6rem 1.3rem;
-      border-radius: 6px; transition: color .2s, background .2s;
+      border-radius: 6px; transition: color .2s;
       position: relative; letter-spacing: .01em;
     }
     .nav-btn::after {
-      content: '';
-      position: absolute;
-      bottom: 6px; left: 50%; right: 50%;
-      height: 2px;
+      content: ''; position: absolute;
+      bottom: 6px; left: 50%; right: 50%; height: 2px;
       background: rgba(255,255,255,0.6);
-      transition: left .25s, right .25s;
-      border-radius: 2px;
+      transition: left .25s, right .25s; border-radius: 2px;
     }
     .nav-btn:hover { color: var(--text); }
     .nav-btn:hover::after, .nav-btn.active::after { left: 16%; right: 16%; }
@@ -109,10 +96,8 @@
     .burger.open span:nth-child(2) { opacity: 0; }
     .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* ── CONTENT ── */
     .content { flex: 1; padding: 4rem 5rem; width: 100%; }
 
-    /* ── FOOTER ── */
     .page-footer {
       text-align: center; padding: 1.5rem;
       font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
@@ -120,18 +105,13 @@
       flex-shrink: 0; position: relative; z-index: 1;
     }
 
-    /* ── PAGE HEADER ── */
     .page-header { margin-bottom: 3rem; }
     .page-header h1 { font-size: clamp(1.8rem, 5vw, 3.2rem); font-weight: 900; text-transform: uppercase; letter-spacing: -.02em; margin-bottom: .5rem; line-height: 1.05; }
     .page-header h1 span { color: var(--accent); }
     .page-header p { color: var(--muted); font-size: .92rem; font-weight: 300; }
 
-    /* ── ACCUEIL ── */
-    .hero-eyebrow {
-      font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
-      color: var(--accent2); margin-bottom: 1.2rem;
-      display: flex; align-items: center; gap: .75rem;
-    }
+    /* ACCUEIL */
+    .hero-eyebrow { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.2rem; display: flex; align-items: center; gap: .75rem; }
     .hero-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--accent2); }
     .hero-title { font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 900; line-height: 1; letter-spacing: -.03em; margin-bottom: 1.2rem; text-transform: uppercase; }
     .hero-title .line2 { color: var(--accent); }
@@ -146,707 +126,21 @@
     .skills-wrap { margin-top: 3rem; }
     .skills-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .18em; color: var(--muted); margin-bottom: 1.2rem; }
     .skills-chips { display: flex; flex-wrap: wrap; gap: .6rem; }
-    .chip {
-      font-size: .78rem; padding: .45rem 1.1rem; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.1); color: var(--muted);
-      background: rgba(255,255,255,.03); cursor: default; transition: all .25s;
-      position: relative; overflow: hidden;
-    }
+    .chip { font-size: .78rem; padding: .45rem 1.1rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.1); color: var(--muted); background: rgba(255,255,255,.03); cursor: default; transition: all .25s; position: relative; overflow: hidden; }
     .chip::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent); transform: translateX(-100%); transition: transform .4s; }
     .chip:hover::after { transform: translateX(100%); }
     .chip:hover { border-color: var(--blue); color: var(--text); transform: translateY(-2px); }
 
-    /* ── RÉALISATIONS ── */
+    /* RÉALISATIONS */
     .page-subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); font-weight: 700; letter-spacing: -.01em; color: var(--accent2); margin-bottom: 1.8rem; }
 
     .real-section-wrapper {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 1rem;
+      border-radius: 16px; padding: 2rem; margin-bottom: 1rem;
       box-shadow: 0 4px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.06);
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
     .real-section-wrapper::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(200,191,239,0.4), transparent);
-      border-radius: 16px 16px 0 0;
-    }
-    .real-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.2rem; }
-
-    .real-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 1.2rem;
-      position: relative; overflow: hidden;
-      transition: transform .3s, border-color .3s, box-shadow .3s;
-    }
-    .real-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: rgba(255,255,255,0.7); transform: scaleX(0); transform-origin: left; transition: transform .4s;
-    }
-    .real-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,.2); box-shadow: 0 20px 40px rgba(0,0,0,.4), 0 0 30px rgba(255,255,255,.05); }
-    .real-card:hover::before { transform: scaleX(1); }
-    .real-num { font-size: .6rem; letter-spacing: .2em; color: var(--accent2); text-transform: uppercase; margin-bottom: .5rem; }
-    .real-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .3rem; }
-    .real-card p { font-size: .87rem; color: var(--muted); line-height: 1.7; margin-bottom: .8rem; }
-    .real-techs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    .real-techs.single { display: flex; }
-
-    .stage-link {
-      font-size: .72rem; padding: .35rem .9rem; border-radius: 6px;
-      border: 1px solid var(--border); color: var(--muted); text-decoration: none;
-      background: rgba(255,255,255,.03); transition: all .2s; font-family: var(--sans);
-      display: inline-block; text-align: center;
-    }
-    .stage-link:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* ── VEILLE ── */
-    .veille-list { display: flex; flex-direction: column; gap: 1.2rem; }
-    .veille-item {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 2rem;
-      display: grid; grid-template-columns: 90px 1fr; gap: 2rem; align-items: start;
-      transition: border-color .25s, transform .25s, box-shadow .25s;
-      position: relative; overflow: hidden;
-    }
-    .veille-item::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: rgba(255,255,255,0.5); transform: scaleY(0); transform-origin: top; transition: transform .3s; }
-    .veille-item:hover { border-color: rgba(255,255,255,.2); transform: translateX(4px); box-shadow: 0 10px 30px rgba(0,0,0,.3); }
-    .veille-item:hover::after { transform: scaleY(1); }
-    .veille-date { font-size: .65rem; text-transform: uppercase; letter-spacing: .1em; color: var(--accent2); line-height: 1.6; font-weight: 600; }
-    .veille-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; }
-    .veille-item p { font-size: .87rem; color: var(--muted); line-height: 1.7; }
-    .veille-tag { display: inline-block; margin-top: .75rem; font-size: .65rem; padding: .25rem .65rem; border-radius: 4px; background: rgba(255,255,255,.08); color: var(--accent); border: 1px solid rgba(255,255,255,.15); text-decoration: none; margin-right: .4rem; }
-
-    /* ── SYNTHÈSE ── */
-    .synth-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: border-color .25s, box-shadow .25s; }
-    .synth-block:hover { border-color: rgba(255,255,255,.2); box-shadow: 0 8px 25px rgba(0,0,0,.3); }
-    .synth-block h3 { font-size: .65rem; text-transform: uppercase; letter-spacing: .18em; color: var(--accent2); margin-bottom: 1.2rem; }
-    .synth-block > p { font-size: .9rem; color: var(--muted); line-height: 1.8; }
-    .timeline { display: flex; flex-direction: column; }
-    .tl-item { display: grid; grid-template-columns: 120px 1fr; gap: 1.2rem; padding: .9rem 0; border-bottom: 1px solid var(--border); }
-    .tl-item:last-child { border-bottom: none; }
-    .tl-date { font-size: .7rem; color: var(--accent2); font-weight: 600; padding-top: .1rem; }
-    .tl-content h4 { font-size: .9rem; font-weight: 600; margin-bottom: .2rem; }
-    .tl-content p { font-size: .8rem; color: var(--muted); line-height: 1.5; }
-
-    /* ── STAGES ── */
-    .stages-list { display: flex; flex-direction: column; gap: 1.5rem; }
-    .stage-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 2rem;
-      display: grid; grid-template-columns: 140px 1fr; gap: 2rem; align-items: start;
-      transition: border-color .25s, transform .25s;
-      position: relative; overflow: hidden;
-    }
-    .stage-card::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px; background: rgba(255,255,255,0.4); transform: scaleY(0); transform-origin: top; transition: transform .3s; }
-    .stage-card:hover { border-color: rgba(255,255,255,.2); transform: translateX(4px); }
-    .stage-card:hover::before { transform: scaleY(1); }
-    .stage-date { font-size: .7rem; color: var(--accent2); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; line-height: 1.6; }
-    .stage-entreprise { font-size: 1.1rem; font-weight: 700; margin-bottom: .4rem; }
-    .stage-poste { font-size: .8rem; color: var(--accent2); margin-bottom: .75rem; letter-spacing: .05em; }
-    .stage-desc { font-size: .87rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
-    .stage-links { display: flex; gap: .75rem; flex-wrap: wrap; }
-
-    /* ── PRÉSENTATION ── */
-    .pres-grid { display: grid; grid-template-columns: 280px 1fr; gap: 2rem; align-items: start; }
-    .pres-avatar { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem 2rem; text-align: center; }
-    .avatar-circle { width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,.08); border: 2px solid var(--border); margin: 0 auto 1.2rem; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
-    .pres-avatar h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: .3rem; }
-    .pres-avatar p { font-size: .8rem; color: var(--muted); margin-bottom: 1.2rem; }
-    .pres-content { display: flex; flex-direction: column; gap: 1.5rem; }
-    .pres-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: border-color .25s; }
-    .pres-block:hover { border-color: rgba(255,255,255,.2); }
-    .pres-block h3 { font-size: .65rem; text-transform: uppercase; letter-spacing: .18em; color: var(--accent2); margin-bottom: 1rem; }
-    .pres-block p { font-size: .9rem; color: var(--muted); line-height: 1.8; }
-    .pres-block ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
-    .pres-block ul li { font-size: .9rem; color: var(--muted); padding-left: 1.2rem; position: relative; }
-    .pres-block ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent2); font-size: .75rem; }
-    .cert-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.2rem; background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 10px; transition: border-color .2s; gap: 1.5rem; }
-    .cert-row:hover { border-color: rgba(255,255,255,.2); }
-    .cert-label { font-size: .62rem; text-transform: uppercase; letter-spacing: .15em; color: var(--accent2); margin-bottom: .3rem; }
-    .cert-title { font-size: .9rem; font-weight: 700; margin-bottom: .2rem; }
-    .cert-desc { font-size: .8rem; color: var(--muted); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .hero-info { grid-template-columns: 1fr 1fr; }
-      .pres-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 768px) {
-      .content { padding: 3rem 2rem; }
-      .real-grid { grid-template-columns: 1fr 1fr; }
-      .stage-card { grid-template-columns: 1fr; gap: 1rem; }
-    }
-    @media (max-width: 480px) {
-      nav { padding: 0 1.2rem; flex-wrap: wrap; }
-      .nav-links { display: none; flex-direction: column; width: 100%; background: rgba(15,14,23,.98); border-top: 1px solid var(--border); padding: .5rem 0; }
-      .nav-links.open { display: flex; }
-      .burger { display: flex; }
-      .nav-btn { width: 100%; text-align: left; border-radius: 0; padding: .85rem 1.2rem; border-bottom: 1px solid var(--border); }
-      .nav-btn:last-child { border-bottom: none; }
-      .nav-btn::after { display: none; }
-      .content { padding: 2.5rem 1.2rem; }
-      .hero-info { grid-template-columns: 1fr 1fr; }
-      .real-grid { grid-template-columns: 1fr; }
-      .veille-item { grid-template-columns: 1fr; gap: .5rem; }
-      .tl-item { grid-template-columns: 70px 1fr; }
-      .real-section-wrapper { padding: 1.2rem 1rem; }
-      .real-techs { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 360px) {
-      .hero-info { grid-template-columns: 1fr; }
-      .content { padding: 2rem 1rem; }
-    }
-  </style>
-</head>
-<body>
-
-<canvas id="particles"></canvas>
-
-<!-- ══════════════════════════════════════════
-     PAGE 1 — ACCUEIL
-══════════════════════════════════════════ -->
-<div class="page active entering" id="page-accueil">
-  <nav>
-    <span class="nav-logo">portfolio-salim</span>
-    <button class="burger" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
-    <div class="nav-links">
-      <button class="nav-btn active"  onclick="goTo('accueil')">Accueil</button>
-      <button class="nav-btn"         onclick="goTo('presentation')">Présentation</button>
-      <button class="nav-btn"         onclick="goTo('stages')">Stages</button>
-      <button class="nav-btn"         onclick="goTo('realisations')">Réalisations professionnelles</button>
-      <button class="nav-btn"         onclick="goTo('veille')">Veille</button>
-      <button class="nav-btn"         onclick="goTo('synthese')">Synthèse</button>
-    </div>
-  </nav>
-  <div class="content">
-    <div class="hero-eyebrow animate d1">BTS SIO · Bordeaux</div>
-    <div class="hero-title animate d2">Portfolio —<br/><span class="line2">Salim</span></div>
-    <div class="hero-sub animate d3">Lycée Gustave Eiffel · 2ème année · 2024 – 2026</div>
-    <div class="hero-info animate d4">
-      <div class="info-cell"><div class="info-label">Formation</div><div class="info-val">BTS SIO</div></div>
-      <div class="info-cell"><div class="info-label">Établissement</div><div class="info-val">Gustave Eiffel</div></div>
-      <div class="info-cell"><div class="info-label">Ville</div><div class="info-val">Bordeaux</div></div>
-      <div class="info-cell"><div class="info-label">Année</div><div class="info-val">2024 — 2026</div></div>
-    </div>
-    <div class="skills-wrap animate d5">
-      <div class="skills-label">Compétences</div>
-      <div class="skills-chips">
-        <span class="chip">Linux / Debian</span>
-        <span class="chip">Python</span>
-        <span class="chip">Administration système</span>
-        <span class="chip">Terminal / Bash</span>
-        <span class="chip">Réseau</span>
-        <span class="chip">Virtualisation</span>
-        <span class="chip">Open Source</span>
-      </div>
-    </div>
-  </div>
-  <div class="page-footer">Salim Salim · Portfolio BTS · 2025</div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     PAGE 2 — PRÉSENTATION
-══════════════════════════════════════════ -->
-<div class="page" id="page-presentation">
-  <nav>
-    <span class="nav-logo">portfolio-salim</span>
-    <button class="burger" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
-    <div class="nav-links">
-      <button class="nav-btn"        onclick="goTo('accueil')">Accueil</button>
-      <button class="nav-btn active" onclick="goTo('presentation')">Présentation</button>
-      <button class="nav-btn"        onclick="goTo('stages')">Stages</button>
-      <button class="nav-btn"        onclick="goTo('realisations')">Réalisations professionnelles</button>
-      <button class="nav-btn"        onclick="goTo('veille')">Veille</button>
-      <button class="nav-btn"        onclick="goTo('synthese')">Synthèse</button>
-    </div>
-  </nav>
-  <div class="content">
-    <div class="page-header animate d1">
-      <h1>Présentation<br/><span>personnelle</span></h1>
-      <p>Qui suis-je ? Mon parcours, mes compétences et mon CV.</p>
-    </div>
-    <div class="pres-grid">
-      <!-- Colonne gauche -->
-      <div class="pres-avatar animate d2">
-        <div class="avatar-circle">&#128100;</div>
-        <h2>Salim Salim</h2>
-        <p>Étudiant BTS SIO<br/>Lycée Gustave Eiffel<br/>Bordeaux</p>
-        <div style="text-align:left;border-top:1px solid var(--border);padding-top:1.2rem;margin-bottom:1.2rem;display:flex;flex-direction:column;gap:.75rem;">
-          <div><div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent2);margin-bottom:.2rem;">Option</div><div style="font-size:.85rem;font-weight:600;">SISR</div></div>
-          <div><div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent2);margin-bottom:.2rem;">Année</div><div style="font-size:.85rem;font-weight:600;">2024 — 2026</div></div>
-          <div><div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent2);margin-bottom:.2rem;">Spécialité</div><div style="font-size:.85rem;font-weight:600;">Systèmes &amp; Réseaux</div></div>
-          <div><div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent2);margin-bottom:.2rem;">Certifications</div><div style="font-size:.85rem;font-weight:600;">PIX · SecNumAcadémie</div></div>
-        </div>
-        <a href="fiche-rp/cv_salim.pdf" target="_blank" class="stage-link" style="width:100%;text-align:center;display:block;">Consulter mon CV</a>
-      </div>
-      <!-- Colonne droite -->
-      <div class="pres-content">
-        <div class="pres-block animate d3">
-          <h3>Qui suis-je ?</h3>
-          <p>Je m'appelle Salim SALIM, j'ai 19 ans et je suis étudiant en BTS SIO option SISR au Lycée Gustave Eiffel de Bordeaux. Cette formation m'a permis de découvrir en profondeur les systèmes et réseaux, et d'acquérir des compétences techniques solides.</p>
-        </div>
-        <div class="pres-block animate d4">
-          <h3>Mes points forts</h3>
-          <ul>
-            <li>Administration Linux / Debian</li>
-            <li>Bases en Python</li>
-            <li>PowerShell</li>
-            <li>Curiosité et travail en équipe</li>
-          </ul>
-        </div>
-        <div class="pres-block animate d5">
-          <h3>Formation</h3>
-          <p>BTS SIO (Services Informatiques aux Organisations) — 2ème année au Lycée Gustave Eiffel, Bordeaux. Option SISR (Solutions d'Infrastructure, Systèmes et Réseaux).</p>
-        </div>
-        <div class="pres-block animate d6">
-          <h3>Certifications</h3>
-          <div style="display:flex;flex-direction:column;gap:1rem;margin-top:.5rem;">
-            <div class="cert-row">
-              <div>
-                <div class="cert-label">PIX</div>
-                <div class="cert-title">Certification PIX</div>
-                <div class="cert-desc">Compétences numériques : sécurité, gestion de données, communication professionnelle.</div>
-              </div>
-              <a href="fiche-rp/certificat-pix.pdf" target="_blank" class="stage-link" style="white-space:nowrap;flex-shrink:0;">Voir le certificat</a>
-            </div>
-            <div class="cert-row">
-              <div>
-                <div class="cert-label">ANSSI</div>
-                <div class="cert-title">MOOC SecNumAcadémie</div>
-                <div class="cert-desc">Cybersécurité : protection des SI, hygiène informatique, gestion des risques et des menaces.</div>
-              </div>
-              <a href="fiche-rp/attestation_mooc_anssi.pdf" target="_blank" class="stage-link" style="white-space:nowrap;flex-shrink:0;">Voir le certificat</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="page-footer">Salim Salim · Portfolio BTS · 2025</div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     PAGE 3 — STAGES
-══════════════════════════════════════════ -->
-<div class="page" id="page-stages">
-  <nav>
-    <span class="nav-logo">portfolio-salim</span>
-    <button class="burger" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
-    <div class="nav-links">
-      <button class="nav-btn"        onclick="goTo('accueil')">Accueil</button>
-      <button class="nav-btn"        onclick="goTo('presentation')">Présentation</button>
-      <button class="nav-btn active" onclick="goTo('stages')">Stages</button>
-      <button class="nav-btn"        onclick="goTo('realisations')">Réalisations professionnelles</button>
-      <button class="nav-btn"        onclick="goTo('veille')">Veille</button>
-      <button class="nav-btn"        onclick="goTo('synthese')">Synthèse</button>
-    </div>
-  </nav>
-  <div class="content">
-    <div class="page-header animate d1">
-      <h1><span>Stages</span></h1>
-      <p>Expériences professionnelles et rapports de stage.</p>
-    </div>
-    <div class="stages-list">
-      <div class="stage-card animate d2">
-        <div class="stage-date">Stage 1<br/>Mai — Juin 2025<br/>5 semaines</div>
-        <div>
-          <div class="stage-entreprise">Ynov Campus (DSI)</div>
-          <div class="stage-poste">Support IT — Administration Système</div>
-          <p class="stage-desc">Stage de 5 semaines au service informatique d'Ynov Campus. Missions axées sur l'administration système : gestion du parc informatique, configuration des postes et support utilisateurs.</p>
-          <div class="stage-links">
-            <a href="fiche-rp/fiche-rp-stage1.pdf" target="_blank" class="stage-link">Fiche RP — Stage 1ère année</a>
-            <a href="https://www.ynov.com" target="_blank" class="stage-link">Site Ynov Campus</a>
-          </div>
-        </div>
-      </div>
-      <div class="stage-card animate d3">
-        <div class="stage-date">Stage 2<br/>19 Jan — 13 Mars 2026<br/>8 semaines</div>
-        <div>
-          <div class="stage-entreprise">Ynov Campus (DSI)</div>
-          <div class="stage-poste">Support IT — Rédaction de procédures</div>
-          <p class="stage-desc">Stage de 8 semaines chez Ynov Campus. Missions principalement orientées rédaction et formalisation de procédures techniques pour documenter les processus informatiques internes.</p>
-          <div class="stage-links">
-            <a href="fiche-rp/fiche-rp-stage2.pdf" target="_blank" class="stage-link">Fiche RP — Stage 2ème année</a>
-            <a href="https://www.ynov.com" target="_blank" class="stage-link">Site Ynov Campus</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="page-footer">Salim Salim · Portfolio BTS · 2025</div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     PAGE 4 — RÉALISATIONS PROFESSIONNELLES
-══════════════════════════════════════════ -->
-<div class="page" id="page-realisations">
-  <nav>
-    <span class="nav-logo">portfolio-salim</span>
-    <button class="burger" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
-    <div class="nav-links">
-      <button class="nav-btn"        onclick="goTo('accueil')">Accueil</button>
-      <button class="nav-btn"        onclick="goTo('presentation')">Présentation</button>
-      <button class="nav-btn"        onclick="goTo('stages')">Stages</button>
-      <button class="nav-btn active" onclick="goTo('realisations')">Réalisations professionnelles</button>
-      <button class="nav-btn"        onclick="goTo('veille')">Veille</button>
-      <button class="nav-btn"        onclick="goTo('synthese')">Synthèse</button>
-    </div>
-  </nav>
-  <div class="content">
-    <div class="page-header animate d1">
-      <h1>Réalisations<br/><span>professionnelles</span></h1>
-      <p>Projets réalisés en cours et en stage.</p>
-    </div>
-
-    <!-- 1ère année -->
-    <h2 class="page-subtitle animate d2">1ère année — 2024 / 2025</h2>
-    <div class="real-section-wrapper animate d3">
-      <div class="real-grid">
-
-        <!-- AP 2.1 — pleine largeur -->
-        <div class="real-card" style="grid-column: 1 / -1;">
-          <div class="real-num">AP 2.1</div>
-          <h3>AP 2.1</h3>
-          <p>Livrables AP 2.1.</p>
-          <div class="real-techs">
-            <a href="fiche-rp/ap2.1.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
-            <a href="strifers11/guide_installation_nextcloud.pdf" target="_blank" class="stage-link">Documentation Installation NextCloud</a>
-            <a href="strifers11/guide_utilisation_nextcloud.pdf" target="_blank" class="stage-link">Documentation Utilisation NextCloud</a>
-            <a href="strifers11/tutoriel_dns.pdf" target="_blank" class="stage-link">Documentation DNS</a>
-            <a href="strifers11/journal_de_bord.pdf" target="_blank" class="stage-link">Journal de bord</a>
-          </div>
-        </div>
-
-        <!-- AP 2.2 -->
-        <div class="real-card">
-          <div class="real-num">AP 2.2</div>
-          <h3>AP 2.2</h3>
-          <p>Livrables AP 2.2.</p>
-          <div class="real-techs single">
-            <a href="fiche-rp/ap2.2.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
-          </div>
-        </div>
-
-        <!-- AP 2.3 -->
-        <div class="real-card">
-          <div class="real-num">AP 2.3</div>
-          <h3>AP 2.3</h3>
-          <p>Livrables AP 2.3.</p>
-          <div class="real-techs single">
-            <a href="fiche-rp/ap2.3.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
-          </div>
-        </div>
-
-        <!-- AP 2.4 -->
-        <div class="real-card">
-          <div class="real-num">AP 2.4</div>
-          <h3>AP 2.4</h3>
-          <p>Livrables AP 2.4.</p>
-          <div class="real-techs single">
-            <a href="fiche-rp/ap2.4.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- 2ème année -->
-    <h2 class="page-subtitle animate d4" style="margin-top:3rem;">2ème année — 2025 / 2026</h2>
-    <div class="real-section-wrapper animate d5">
-      <div class="real-grid">
-
-        <!-- AP 3.1 -->
-        <div class="real-card" style="grid-column: 1 / -1;">
-          <div class="real-num">AP 3.1</div>
-          <h3>AP 3.1</h3>
-          <p>Livrables AP 3.1.</p>
-          <div class="real-techs">
-            <a href="fiche-rp/ap3.1.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
-            <a href="navajo/documentation_extralab.pdf" target="_blank" class="stage-link">Documentation Extralab</a>
-            <a href="navajo/fiche_recette_navajo.pdf" target="_blank" class="stage-link">Fiche recette</a>
-            <a href="navajo/journal_de_bord_extralab.pdf" target="_blank" class="stage-link">Journal de bord</a>
-            <a href="navajo/fiche_bilan.pdf" target="_blank" class="stage-link">Fiche Bilan</a>
-            <a href="navajo/grille_analyse" target="_blank" class="stage-link">Grille d'analyse</a>
-          </div>
-        </div>
-
-        <!-- AP 3.2 -->
-        <div class="real-card" style="grid-column: 1 / -1;">
-          <div class="real-num">AP 3.2</div>
-          <h3>AP 3.2</h3>
-          <p>Livrables AP 3.2.</p>
-          <div class="real-techs">
-            <a href="fiche-rp/ap3.2.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
-            <a href="gpopu/documentation_mise_en_oeuvre_gpo.pdf" target="_blank" class="stage-link">Documentation mise en oeuvre GPO</a>
-            <a href="gpopu/journal_de_bord_salim.pdf" target="_blank" class="stage-link">Journal de bord</a>
-            <a href="gpopu/matrice_de_gpo.pdf" target="_blank" class="stage-link">Matrice de GPO</a>
-            <a href="gpopu/structure_annuaire_salim.pdf" target="_blank" class="stage-link">Structure annuaire</a>
-            <a href="gpopu/tutoriel_de_sauvegarde.pdf" target="_blank" class="stage-link">Tutoriel de sauvegarde</a>
-            <a href="gpopu/script_powershell.txt" target="_blank" class="stage-link">Script PowerShell</a>
-          </div>
-        </div>
-
-        <!-- AP 4.1 -->
-        <div class="real-card" style="grid-column: 1 / -1;">
-          <div class="real-num">AP 4.1</div>
-          <h3>AP 4.1</h3>
-          <p>Livrables AP 4.1.</p>
-          <div class="real-techs">
-            <a href="fiche-rp/ap4.1.pdf" target="_blank" class="stage-link">Voir la fiche PDF</a>
-            <a href="dmz/Bgtw.pdf" target="_blank" class="stage-link">Documentation Bgtw</a>
-            <a href="dmz/Fiche Recette.pdf" target="_blank" class="stage-link">Fiche recette</a>
-            <a href="dmz/Journal de bord salim.pdf" target="_blank" class="stage-link">Journal de bord</a>
-            <a href="dmz/schema_reseau_logique.pdf" target="_blank" class="stage-link">Schéma réseau logique</a>
-            <a href="dmz/config-Bgtw1.m2l.fr-20260207150726.xml" target="_blank" class="stage-link">Configuration Bgtw</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  <div class="page-footer">Salim · Portfolio BTS SIO · 2025</div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     PAGE 5 — VEILLE
-══════════════════════════════════════════ -->
-<div class="page" id="page-veille">
-  <nav>
-    <span class="nav-logo">portfolio-salim</span>
-    <button class="burger" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
-    <div class="nav-links">
-      <button class="nav-btn"        onclick="goTo('accueil')">Accueil</button>
-      <button class="nav-btn"        onclick="goTo('presentation')">Présentation</button>
-      <button class="nav-btn"        onclick="goTo('stages')">Stages</button>
-      <button class="nav-btn"        onclick="goTo('realisations')">Réalisations professionnelles</button>
-      <button class="nav-btn active" onclick="goTo('veille')">Veille</button>
-      <button class="nav-btn"        onclick="goTo('synthese')">Synthèse</button>
-    </div>
-  </nav>
-  <div class="content">
-    <div class="page-header animate d1">
-      <h1>Veille<br/><span>technologique</span></h1>
-      <p>Thème : IA &amp; Cybersécurité — Suivi des menaces et innovations défensives.</p>
-    </div>
-
-    <div class="synth-block animate d2" style="margin-bottom:2.5rem;border-left:3px solid rgba(200,191,239,0.5);">
-      <h3>Résumé</h3>
-      <p>L'IA amplifie les cyberattaques (phishing ciblé, malwares adaptatifs, exploitation automatisée) tout en dopant la défense via DevSecOps, Zero Trust et détection d'anomalies. Face à des intrusions de plus en plus rapides, maîtriser ces enjeux est indispensable pour tout technicien SISR.</p>
-    </div>
-
-    <div class="veille-list">
-      <div class="veille-item animate d3">
-        <div class="veille-date">Fév.<br/>2026</div>
-        <div>
-          <h3>L'IA transforme le paysage des menaces</h3>
-          <p>Selon le rapport State of AI Cybersecurity 2026 de Kiteworks (1 800 professionnels interrogés), 73 % des entreprises subissent déjà des attaques assistées par IA : phishing hyper-personnalisé, malwares adaptatifs, chaînes d'exploitation automatisées. Pourtant, seules 37 % disposent d'une politique formelle de gouvernance IA.</p>
-          <a href="https://www.kiteworks.com/cybersecurity-risk-management/ai-cybersecurity-2026-trends-report/" target="_blank" class="veille-tag">Source : Kiteworks — State of AI Cybersecurity 2026</a>
-        </div>
-      </div>
-      <div class="veille-item animate d3">
-        <div class="veille-date">Mars<br/>2026</div>
-        <div>
-          <h3>DevSecOps : la sécurité intégrée devient la norme</h3>
-          <p>Le rapport State of DevSecOps 2026 de Datadog révèle que 87 % des organisations ont au moins une vulnérabilité exploitable en production. La réponse s'organise autour du DevSecOps : scanners automatiques dans les pipelines CI/CD, analyse des dépendances, sécurisation de la supply chain. L'IA joue un rôle actif de détection et correction avant déploiement.</p>
-          <a href="https://www.helpnetsecurity.com/2026/03/02/devsecops-supply-chain-risk-security-debt/" target="_blank" class="veille-tag">Source : Datadog State of DevSecOps 2026</a>
-        </div>
-      </div>
-      <div class="veille-item animate d4">
-        <div class="veille-date">Fév.<br/>2026</div>
-        <div>
-          <h3>L'IA accélère les attaques : les chiffres clés</h3>
-          <p>Le CrowdStrike Global Threat Report 2026 confirme que le temps de rupture moyen est tombé à 29 minutes, soit 65 % plus rapide qu'en 2024, avec un record absolu à 27 secondes. Les attaques pilotées par IA ont augmenté de 89 % sur un an. La défense humaine seule ne suffit plus.</p>
-          <a href="https://www.crowdstrike.com/en-us/global-threat-report/" target="_blank" class="veille-tag">Source : CrowdStrike Global Threat Report 2026</a>
-        </div>
-      </div>
-      <div class="veille-item animate d4">
-        <div class="veille-date">Jan.<br/>2026</div>
-        <div>
-          <h3>Évolution des attaques les plus fréquentes</h3>
-          <p>Forte hausse des ransomwares multi-étapes (chiffrement + exfiltration + menace de divulgation), du spear-phishing contextuel alimenté par IA, et des attaques sur la supply chain logicielle. L'Europe représente 22 % des attaques ransomware mondiales, avec 3,2 millions d'attaques DDoS recensées en EMEA.</p>
-          <a href="https://www.crowdstrike.com/en-us/global-threat-report/" target="_blank" class="veille-tag">Source : CrowdStrike 2026</a>
-          <a href="https://fr.euronews.com/next/2026/01/12/cybersecurite-2026-des-intrusions-liees-a-lia-aux-menaces-geopolitiques-croissantes" target="_blank" class="veille-tag">Source : Euronews 2026</a>
-        </div>
-      </div>
-      <div class="veille-item animate d5">
-        <div class="veille-date">2026</div>
-        <div>
-          <h3>Innovations défensives clés</h3>
-          <p>Les entreprises adoptent le Zero Trust généralisé, l'IA défensive pour la détection d'anomalies comportementales, la segmentation automatique des réseaux et l'automatisation de la réponse aux incidents. Les tests d'intrusion continus intégrés aux pipelines DevOps (shift-left security) deviennent la norme.</p>
-          <a href="https://focus-corporation.com/fr/cybersecurity-trends-pour-2026/" target="_blank" class="veille-tag">Source : Focus Corporation — Cybersecurity trends 2026</a>
-        </div>
-      </div>
-      <div class="veille-item animate d5">
-        <div class="veille-date">2026</div>
-        <div>
-          <h3>Souveraineté numérique &amp; réglementation européenne</h3>
-          <p>L'UE renforce son arsenal avec NIS2, DORA et l'AI Act (applicable au 2 août 2026). Face à la dépendance aux clouds non-européens — plus de 45 % des entreprises de l'UE — la souveraineté numérique devient un impératif stratégique.</p>
-          <a href="https://antares.fr/blog/infogerance/souverainete-numerique-leurope-accelere-face-aux-tensions-geopolitiques-et-a-la-dependance-cloud/" target="_blank" class="veille-tag">Source : Antares.fr</a>
-          <a href="https://www.haas-avocats.com/non-categorise/souverainete-numerique-reduire-les-risques-avec-dora-data-et-ia-act/" target="_blank" class="veille-tag">Source : Haas Avocats — DORA, NIS2, IA Act</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="page-footer">Salim Salim · Portfolio BTS · 2025</div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     PAGE 6 — SYNTHÈSE
-══════════════════════════════════════════ -->
-<div class="page" id="page-synthese">
-  <nav>
-    <span class="nav-logo">portfolio-salim</span>
-    <button class="burger" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
-    <div class="nav-links">
-      <button class="nav-btn"        onclick="goTo('accueil')">Accueil</button>
-      <button class="nav-btn"        onclick="goTo('presentation')">Présentation</button>
-      <button class="nav-btn"        onclick="goTo('stages')">Stages</button>
-      <button class="nav-btn"        onclick="goTo('realisations')">Réalisations professionnelles</button>
-      <button class="nav-btn"        onclick="goTo('veille')">Veille</button>
-      <button class="nav-btn active" onclick="goTo('synthese')">Synthèse</button>
-    </div>
-  </nav>
-  <div class="content">
-    <div class="page-header animate d1">
-      <h1><span>Synthèse</span></h1>
-      <p>Bilan de ma formation et de mon parcours en BTS.</p>
-    </div>
-    <div class="synth-block animate d3">
-      <h3>Compétences acquises</h3>
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-date">Compétence</div>
-          <div class="tl-content"><h4>Linux / Debian</h4><p>Administration, configuration, gestion des services.</p></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">Compétence</div>
-          <div class="tl-content"><h4>Python</h4><p>Scripting, automatisation, logique de programmation.</p></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">Compétence</div>
-          <div class="tl-content"><h4>À compléter</h4><p>Décris une autre compétence clé.</p></div>
-        </div>
-      </div>
-    </div>
-    <div class="synth-block animate d4" style="margin-top:1.5rem;">
-      <h3>Parcours</h3>
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-date">Sept. 2024</div>
-          <div class="tl-content"><h4>Entrée en BTS</h4><p>Lycée Gustave Eiffel, Bordeaux.</p></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">2024 – 2025</div>
-          <div class="tl-content"><h4>1ère année</h4><p>Découverte des spécialités SLAM/SISR. Choix SISR.</p></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">2025 – 2026</div>
-          <div class="tl-content"><h4>2ème année</h4><p>Approfondissement réseau et système, montée en autonomie.</p></div>
-        </div>
-      </div>
-    </div>
-    <div class="real-card animate d5" style="margin-top:1.5rem;">
-      <div class="real-num">TS</div>
-      <h3>Table de Synthèse</h3>
-      <p>Table de Synthèse SISR.</p>
-      <div class="real-techs single" style="margin-top:.5rem;">
-        <a href="fiche-rp/TS-sisr.pdf" target="_blank" class="stage-link">Voir la table de synthèse</a>
-      </div>
-    </div>
-  </div>
-  <div class="page-footer">Salim Salim · Portfolio BTS · 2025</div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     SCRIPTS
-══════════════════════════════════════════ -->
-<script>
-  /* ── Navigation ── */
-  function goTo(page) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active', 'entering'));
-    document.querySelectorAll('.nav-links').forEach(n => n.classList.remove('open'));
-    document.querySelectorAll('.burger').forEach(b => b.classList.remove('open'));
-
-    const target = document.getElementById('page-' + page);
-    if (!target) return;
-    target.classList.add('active');
-
-    // reset animations
-    target.querySelectorAll('.animate').forEach(el => {
-      el.style.animation = 'none';
-      el.offsetHeight; // reflow
-      el.style.animation = '';
-    });
-    setTimeout(() => target.classList.add('entering'), 10);
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }
-
-  function toggleMenu(btn) {
-    btn.classList.toggle('open');
-    const links = btn.closest('nav').querySelector('.nav-links');
-    if (links) links.classList.toggle('open');
-  }
-
-  /* ── Particles ── */
-  const canvas = document.getElementById('particles');
-  const ctx    = canvas.getContext('2d');
-  let W, H, particles = [];
-
-  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-  resize();
-  window.addEventListener('resize', resize);
-
-  function Particle() {
-    this.x  = Math.random() * W;
-    this.y  = Math.random() * H;
-    this.r  = Math.random() * 1.5 + 0.3;
-    this.vx = (Math.random() - 0.5) * 0.3;
-    this.vy = (Math.random() - 0.5) * 0.3;
-    this.a  = Math.random() * 0.5 + 0.1;
-    const hues = [270, 280, 260, 250];
-    this.hue = hues[Math.floor(Math.random() * hues.length)];
-  }
-  Particle.prototype.update = function() {
-    this.x += this.vx; this.y += this.vy;
-    if (this.x < 0) this.x = W; if (this.x > W) this.x = 0;
-    if (this.y < 0) this.y = H; if (this.y > H) this.y = 0;
-  };
-  Particle.prototype.draw = function() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-    ctx.fillStyle = `hsla(${this.hue},30%,90%,${this.a})`;
-    ctx.fill();
-  };
-
-  for (let i = 0; i < 90; i++) particles.push(new Particle());
-
-  function drawLines() {
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx   = particles[i].x - particles[j].x;
-        const dy   = particles[i].y - particles[j].y;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 100) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(220,215,255,${0.07 * (1 - dist / 100)})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
-    }
-  }
-
-  (function loop() {
-    ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => { p.update(); p.draw(); });
-    drawLines();
-    requestAnimationFrame(loop);
-  })();
-</script>
-</body>
-</html>
+      background: linear-gradient(90deg, transparent, rgba(200,191,239,0
