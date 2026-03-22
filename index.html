@@ -146,7 +146,6 @@
       background: linear-gradient(90deg, transparent, rgba(200,191,239,0.4), transparent);
     }
 
-    /* ★ 2 colonnes fixes ★ */
     .real-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -179,23 +178,6 @@
       display: inline-block; text-align: center;
     }
     .stage-link:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* VEILLE */
-    .veille-list { display: flex; flex-direction: column; gap: 1.2rem; }
-    .veille-item {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 2rem;
-      display: grid; grid-template-columns: 90px 1fr; gap: 2rem; align-items: start;
-      transition: border-color .25s, transform .25s, box-shadow .25s;
-      position: relative; overflow: hidden;
-    }
-    .veille-item::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: rgba(255,255,255,0.5); transform: scaleY(0); transform-origin: top; transition: transform .3s; }
-    .veille-item:hover { border-color: rgba(255,255,255,.2); transform: translateX(4px); box-shadow: 0 10px 30px rgba(0,0,0,.3); }
-    .veille-item:hover::after { transform: scaleY(1); }
-    .veille-date { font-size: .65rem; text-transform: uppercase; letter-spacing: .1em; color: var(--accent2); line-height: 1.6; font-weight: 600; }
-    .veille-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; }
-    .veille-item p { font-size: .87rem; color: var(--muted); line-height: 1.7; }
-    .veille-tag { display: inline-block; margin-top: .75rem; font-size: .65rem; padding: .25rem .65rem; border-radius: 4px; background: rgba(255,255,255,.08); color: var(--accent); border: 1px solid rgba(255,255,255,.15); text-decoration: none; margin-right: .4rem; }
 
     /* SYNTHÈSE */
     .synth-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: border-color .25s, box-shadow .25s; }
@@ -267,7 +249,6 @@
       .content { padding: 2.5rem 1.2rem; }
       .hero-info { grid-template-columns: 1fr 1fr; }
       .real-grid { grid-template-columns: 1fr; }
-      .veille-item { grid-template-columns: 1fr; gap: .5rem; }
       .tl-item { grid-template-columns: 70px 1fr; }
       .real-section-wrapper { padding: 1.2rem 1rem; }
       .real-techs { grid-template-columns: 1fr; }
@@ -292,7 +273,6 @@
       <button class="nav-btn"        onclick="goTo('presentation')">Présentation</button>
       <button class="nav-btn"        onclick="goTo('stages')">Stages</button>
       <button class="nav-btn"        onclick="goTo('realisations')">Réalisations professionnelles</button>
-      <button class="nav-btn"        onclick="goTo('veille')">Veille</button>
       <button class="nav-btn"        onclick="goTo('synthese')">Synthèse</button>
     </div>
   </nav>
@@ -332,7 +312,6 @@
       <button class="nav-btn active" onclick="goTo('presentation')">Présentation</button>
       <button class="nav-btn"        onclick="goTo('stages')">Stages</button>
       <button class="nav-btn"        onclick="goTo('realisations')">Réalisations professionnelles</button>
-      <button class="nav-btn"        onclick="goTo('veille')">Veille</button>
       <button class="nav-btn"        onclick="goTo('synthese')">Synthèse</button>
     </div>
   </nav>
@@ -409,7 +388,6 @@
       <button class="nav-btn"        onclick="goTo('presentation')">Présentation</button>
       <button class="nav-btn active" onclick="goTo('stages')">Stages</button>
       <button class="nav-btn"        onclick="goTo('realisations')">Réalisations professionnelles</button>
-      <button class="nav-btn"        onclick="goTo('veille')">Veille</button>
       <button class="nav-btn"        onclick="goTo('synthese')">Synthèse</button>
     </div>
   </nav>
@@ -439,7 +417,7 @@
           <p class="stage-desc">Stage de 8 semaines chez Ynov Campus. Missions principalement orientées rédaction et formalisation de procédures techniques pour documenter les processus informatiques internes.</p>
           <div class="stage-links">
             <a href="fiche-rp/fiche-rp-stage2.pdf" target="_blank" class="stage-link">Fiche RP — Stage 2ème année</a>
-             <a href="fiche-rp/procedure-delegation-active-directory.pdf" target="_blank" class="stage-link">Délégation des droits</a>
+            <a href="fiche-rp/procedure-delegation-active-directory.pdf" target="_blank" class="stage-link">Délégation des droits</a>
             <a href="https://www.ynov.com" target="_blank" class="stage-link">Site Ynov Campus</a>
           </div>
         </div>
@@ -459,7 +437,6 @@
       <button class="nav-btn"        onclick="goTo('presentation')">Présentation</button>
       <button class="nav-btn"        onclick="goTo('stages')">Stages</button>
       <button class="nav-btn active" onclick="goTo('realisations')">Réalisations professionnelles</button>
-      <button class="nav-btn"        onclick="goTo('veille')">Veille</button>
       <button class="nav-btn"        onclick="goTo('synthese')">Synthèse</button>
     </div>
   </nav>
@@ -472,8 +449,6 @@
     <h2 class="page-subtitle animate d2">1ère année — 2024 / 2025</h2>
     <div class="real-section-wrapper animate d3">
       <div class="real-grid">
-
-        <!-- AP 2.1 : colonne gauche -->
         <div class="real-card">
           <div class="real-num">AP 2.1</div>
           <h3>AP 2.1</h3>
@@ -486,8 +461,6 @@
             <a href="strifers11/journal_strife.pdf" target="_blank" class="stage-link">Journal de bord</a>
           </div>
         </div>
-
-        <!-- AP 2.2 -->
         <div class="real-card">
           <div class="real-num">AP 2.2</div>
           <h3>AP 2.2</h3>
@@ -499,8 +472,6 @@
             <a href="godzilla/journal_fog.pdf" target="_blank" class="stage-link">Journal de bord</a>
           </div>
         </div>
-
-        <!-- AP 2.3 -->
         <div class="real-card">
           <div class="real-num">AP 2.3</div>
           <h3>AP 2.3</h3>
@@ -515,8 +486,6 @@
             <a href="flexoffice/journal_FlexOffice.pdf" target="_blank" class="stage-link">Journal de bord</a>
           </div>
         </div>
-
-        <!-- AP 2.4 -->
         <div class="real-card">
           <div class="real-num">AP 2.4</div>
           <h3>AP 2.4</h3>
@@ -529,15 +498,12 @@
             <a href="assiz/journal_assiz.pdf" target="_blank" class="stage-link">Journal de bord</a>
           </div>
         </div>
-
       </div>
     </div>
 
     <h2 class="page-subtitle animate d4" style="margin-top:3rem;">2ème année — 2025 / 2026</h2>
     <div class="real-section-wrapper animate d5">
       <div class="real-grid" style="grid-template-columns: repeat(3, 1fr);">
-
-        <!-- AP 3.1 -->
         <div class="real-card">
           <div class="real-num">AP 3.1</div>
           <h3>AP 3.1</h3>
@@ -550,8 +516,6 @@
             <a href="navajo/fiche_bilan.pdf" target="_blank" class="stage-link">Fiche Bilan</a>
           </div>
         </div>
-
-        <!-- AP 3.2 -->
         <div class="real-card">
           <div class="real-num">AP 3.2</div>
           <h3>AP 3.2</h3>
@@ -566,8 +530,6 @@
             <a href="gpopu/script_powershell.txt" target="_blank" class="stage-link">Script PowerShell</a>
           </div>
         </div>
-
-        <!-- AP 4.1 -->
         <div class="real-card">
           <div class="real-num">AP 4.1</div>
           <h3>AP 4.1</h3>
@@ -581,93 +543,13 @@
             <a href="dmz/config-Bgtw1.m2l.fr-20260207150726.xml" target="_blank" class="stage-link">Configuration Bgtw</a>
           </div>
         </div>
-
       </div>
     </div>
   </div>
   <div class="page-footer">Salim · Portfolio BTS SIO · 2025</div>
 </div>
 
-<!-- PAGE 5 — VEILLE -->
-<div class="page" id="page-veille">
-  <nav>
-    <span class="nav-logo">portfolio-salim</span>
-    <button class="burger" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
-    <div class="nav-links">
-      <button class="nav-btn"        onclick="goTo('accueil')">Accueil</button>
-      <button class="nav-btn"        onclick="goTo('presentation')">Présentation</button>
-      <button class="nav-btn"        onclick="goTo('stages')">Stages</button>
-      <button class="nav-btn"        onclick="goTo('realisations')">Réalisations professionnelles</button>
-      <button class="nav-btn active" onclick="goTo('veille')">Veille</button>
-      <button class="nav-btn"        onclick="goTo('synthese')">Synthèse</button>
-    </div>
-  </nav>
-  <div class="content">
-    <div class="page-header animate d1">
-      <h1>Veille<br/><span>technologique</span></h1>
-      <p>Thème : IA &amp; Cybersécurité — Suivi des menaces et innovations défensives.</p>
-    </div>
-    <div class="synth-block animate d2" style="margin-bottom:2.5rem;border-left:3px solid rgba(200,191,239,0.5);">
-      <h3>Résumé</h3>
-      <p>L'IA amplifie les cyberattaques (phishing ciblé, malwares adaptatifs, exploitation automatisée) tout en dopant la défense via DevSecOps, Zero Trust et détection d'anomalies. Face à des intrusions de plus en plus rapides, maîtriser ces enjeux est indispensable pour tout technicien SISR.</p>
-    </div>
-    <div class="veille-list">
-      <div class="veille-item animate d3">
-        <div class="veille-date">Fév.<br/>2026</div>
-        <div>
-          <h3>L'IA transforme le paysage des menaces</h3>
-          <p>Selon le rapport State of AI Cybersecurity 2026 de Kiteworks (1 800 professionnels interrogés), 73 % des entreprises subissent déjà des attaques assistées par IA : phishing hyper-personnalisé, malwares adaptatifs, chaînes d'exploitation automatisées. Pourtant, seules 37 % disposent d'une politique formelle de gouvernance IA.</p>
-          <a href="https://www.kiteworks.com/cybersecurity-risk-management/ai-cybersecurity-2026-trends-report/" target="_blank" class="veille-tag">Source : Kiteworks — State of AI Cybersecurity 2026</a>
-        </div>
-      </div>
-      <div class="veille-item animate d3">
-        <div class="veille-date">Mars<br/>2026</div>
-        <div>
-          <h3>DevSecOps : la sécurité intégrée devient la norme</h3>
-          <p>Le rapport State of DevSecOps 2026 de Datadog révèle que 87 % des organisations ont au moins une vulnérabilité exploitable en production. La réponse s'organise autour du DevSecOps : scanners automatiques dans les pipelines CI/CD, analyse des dépendances, sécurisation de la supply chain. L'IA joue un rôle actif de détection et correction avant déploiement.</p>
-          <a href="https://www.helpnetsecurity.com/2026/03/02/devsecops-supply-chain-risk-security-debt/" target="_blank" class="veille-tag">Source : Datadog State of DevSecOps 2026</a>
-        </div>
-      </div>
-      <div class="veille-item animate d4">
-        <div class="veille-date">Fév.<br/>2026</div>
-        <div>
-          <h3>L'IA accélère les attaques : les chiffres clés</h3>
-          <p>Le CrowdStrike Global Threat Report 2026 confirme que le temps de rupture moyen est tombé à 29 minutes, soit 65 % plus rapide qu'en 2024, avec un record absolu à 27 secondes. Les attaques pilotées par IA ont augmenté de 89 % sur un an. La défense humaine seule ne suffit plus.</p>
-          <a href="https://www.crowdstrike.com/en-us/global-threat-report/" target="_blank" class="veille-tag">Source : CrowdStrike Global Threat Report 2026</a>
-        </div>
-      </div>
-      <div class="veille-item animate d4">
-        <div class="veille-date">Jan.<br/>2026</div>
-        <div>
-          <h3>Évolution des attaques les plus fréquentes</h3>
-          <p>Forte hausse des ransomwares multi-étapes (chiffrement + exfiltration + menace de divulgation), du spear-phishing contextuel alimenté par IA, et des attaques sur la supply chain logicielle. L'Europe représente 22 % des attaques ransomware mondiales, avec 3,2 millions d'attaques DDoS recensées en EMEA.</p>
-          <a href="https://www.crowdstrike.com/en-us/global-threat-report/" target="_blank" class="veille-tag">Source : CrowdStrike 2026</a>
-          <a href="https://fr.euronews.com/next/2026/01/12/cybersecurite-2026-des-intrusions-liees-a-lia-aux-menaces-geopolitiques-croissantes" target="_blank" class="veille-tag">Source : Euronews 2026</a>
-        </div>
-      </div>
-      <div class="veille-item animate d5">
-        <div class="veille-date">2026</div>
-        <div>
-          <h3>Innovations défensives clés</h3>
-          <p>Les entreprises adoptent le Zero Trust généralisé, l'IA défensive pour la détection d'anomalies comportementales, la segmentation automatique des réseaux et l'automatisation de la réponse aux incidents. Les tests d'intrusion continus intégrés aux pipelines DevOps (shift-left security) deviennent la norme.</p>
-          <a href="https://focus-corporation.com/fr/cybersecurity-trends-pour-2026/" target="_blank" class="veille-tag">Source : Focus Corporation — Cybersecurity trends 2026</a>
-        </div>
-      </div>
-      <div class="veille-item animate d5">
-        <div class="veille-date">2026</div>
-        <div>
-          <h3>Souveraineté numérique &amp; réglementation européenne</h3>
-          <p>L'UE renforce son arsenal avec NIS2, DORA et l'AI Act (applicable au 2 août 2026). Face à la dépendance aux clouds non-européens — plus de 45 % des entreprises de l'UE — la souveraineté numérique devient un impératif stratégique.</p>
-          <a href="https://antares.fr/blog/infogerance/souverainete-numerique-leurope-accelere-face-aux-tensions-geopolitiques-et-a-la-dependance-cloud/" target="_blank" class="veille-tag">Source : Antares.fr</a>
-          <a href="https://www.haas-avocats.com/non-categorise/souverainete-numerique-reduire-les-risques-avec-dora-data-et-ia-act/" target="_blank" class="veille-tag">Source : Haas Avocats — DORA, NIS2, IA Act</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="page-footer">Salim Salim · Portfolio BTS · 2025</div>
-</div>
-
-<!-- PAGE 6 — SYNTHÈSE -->
+<!-- PAGE 5 — SYNTHÈSE -->
 <div class="page" id="page-synthese">
   <nav>
     <span class="nav-logo">portfolio-salim</span>
@@ -677,7 +559,6 @@
       <button class="nav-btn"        onclick="goTo('presentation')">Présentation</button>
       <button class="nav-btn"        onclick="goTo('stages')">Stages</button>
       <button class="nav-btn"        onclick="goTo('realisations')">Réalisations professionnelles</button>
-      <button class="nav-btn"        onclick="goTo('veille')">Veille</button>
       <button class="nav-btn active" onclick="goTo('synthese')">Synthèse</button>
     </div>
   </nav>
