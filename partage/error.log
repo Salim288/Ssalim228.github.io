@@ -1,0 +1,6 @@
+[Thu Dec 04 21:34:52.005816 2025] [ssl:warn] [pid 571:tid 571] AH01909: www.extralab.galaxy-swiss.lan:443:0 server certificate does NOT include an ID which matches the server name
+[Thu Dec 04 21:34:52.007507 2025] [ssl:warn] [pid 571:tid 571] AH01909: www.extralab.galaxy-swiss.lan:443:0 server certificate does NOT include an ID which matches the server name
+[Thu Dec 04 21:34:52.036563 2025] [ssl:warn] [pid 668:tid 668] AH01909: www.extralab.galaxy-swiss.lan:443:0 server certificate does NOT include an ID which matches the server name
+[Thu Dec 04 21:34:52.037769 2025] [ssl:warn] [pid 668:tid 668] AH01909: www.extralab.galaxy-swiss.lan:443:0 server certificate does NOT include an ID which matches the server name
+[Thu Dec 04 21:34:52.040947 2025] [mpm_event:notice] [pid 668:tid 668] AH00489: Apache/2.4.65 (Debian) OpenSSL/3.0.17 configured -- resuming normal operations
+[Thu Dec 04 21:34:52.040973 2025] [core:notice] [pid 668:tid 668] AH00094: Command line: '/usr/sbin/apache2'
